@@ -65,7 +65,13 @@ jobs:
           ( set -x; docker-compose -f scripts/router-e2e-defer-tests/docker-compose.router.yml  up -d )
           sleep 8
           docker-compose -f scripts/router-e2e-defer-tests/docker-compose.router.yml logs
-      - name: smoke test
-        run: scripts/router-e2e-defer-tests/smoke.sh 4000
+      # - name: smoke test
+      #   run: scripts/router-e2e-defer-tests/smoke.sh 4000
+      - name: Cypress run
+        uses: cypress-io/github-action@v4
+        with:
+          working-directory: CRA-demo
+      # - name: install CRA dependencies and run Cypress tests
+        # run: cd CRA-demo && npm i && npm run test && cd ..
       - name: docker-compose down
         run: docker-compose -f scripts/router-e2e-defer-tests/docker-compose.router.yml down
