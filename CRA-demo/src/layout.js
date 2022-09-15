@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
-import "../css/App.css";
+import "./css/App.css";
 
 const client = new ApolloClient({
   uri: "http://localhost:4000/",
