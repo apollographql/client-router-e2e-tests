@@ -50,18 +50,18 @@ jobs:
           echo ---------------------------------------------------------------
       - name: make supergraph
         run: |
-          cd scripts/router-e2e-defer-tests
+          cd scripts
           make supergraph
           cat ./supergraph.graphql
           cd ../../
       - name: docker-compose build
         run: |
-          ( set -x; docker-compose -f scripts/router-e2e-defer-tests/docker-compose.router.yml build --no-cache --pull --parallel --progress plain )
+          ( set -x; docker-compose -f scripts/docker-compose.router.yml build --no-cache --pull --parallel --progress plain )
       - name: docker-compose up -d
         run: |
-          ( set -x; docker-compose -f scripts/router-e2e-defer-tests/docker-compose.router.yml  up -d )
+          ( set -x; docker-compose -f scripts/docker-compose.router.yml  up -d )
           sleep 8
-          docker-compose -f scripts/router-e2e-defer-tests/docker-compose.router.yml logs
+          docker-compose -f scripts/docker-compose.router.yml logs
       - name: Cypress run
         uses: cypress-io/github-action@v4
         with:
@@ -70,4 +70,4 @@ jobs:
           working-directory: CRA-demo
           command: npm run test
       - name: docker-compose down
-        run: docker-compose -f scripts/router-e2e-defer-tests/docker-compose.router.yml down
+        run: docker-compose -f scripts/docker-compose.router.yml down
