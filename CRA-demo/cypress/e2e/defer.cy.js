@@ -89,7 +89,7 @@ describe("@defer tests", () => {
   });
 
   // https://github.com/graphql/graphql-js/blob/a24a9f35b876bdd0d5050eca34d3020bd0db9a29/src/execution/__tests__/defer-test.ts#L398
-  it.only("Can defer an inline fragment", () => {
+  it("Can defer an inline fragment", () => {
     cy.visit("/defer-inline-fragment");
     cy.findByText(/loading/i).should("exist");
     cy.findByText(/apollo-federation/i).should("exist");
