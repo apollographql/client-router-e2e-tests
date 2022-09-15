@@ -54,33 +54,53 @@ describe("@defer tests", () => {
     cy.findByText(/variation: oss - platform/i).should("exist");
   });
 
+  // currently failing
   // https://github.com/graphql/graphql-js/blob/a24a9f35b876bdd0d5050eca34d3020bd0db9a29/src/execution/__tests__/defer-test.ts#L196
   it.skip("Can defer fragments on the top level Query field", () => {
-    // TODO
-  });
-
-  // https://github.com/graphql/graphql-js/blob/a24a9f35b876bdd0d5050eca34d3020bd0db9a29/src/execution/__tests__/defer-test.ts#L230
-  it.skip("Can defer fragments with errors on the top level Query field", () => {
-    // TODO
+    cy.visit('/disable-top-level-query-field');
+    cy.findByText(/loading/i).should("exist");
   });
 
   // https://github.com/graphql/graphql-js/blob/a24a9f35b876bdd0d5050eca34d3020bd0db9a29/src/execution/__tests__/defer-test.ts#L271
-  it.skip("Can defer a fragment within an already deferred fragment", () => {
-    // TODO
+  it("Can defer a fragment within an already deferred fragment", () => {
+    cy.visit('/nested-deferred-fragments');
+    cy.findByText(/loading/i).should("exist");
+    cy.findByText(/apollo-federation/i).should("exist");
+    cy.findByText(/apollo-studio/i).should("exist");
+    // because of nested @defer directives,
+    // the fast data in the first @defer fragment comes back quickly
+    cy.findAllByText(/size: 1/i).should("exist");
+    cy.findByText(/variation: oss - platform/i).should("not.exist");
+    cy.wait(3000);
+    cy.findByText(/variation: oss - platform/i).should("exist");
   });
 
   // https://github.com/graphql/graphql-js/blob/a24a9f35b876bdd0d5050eca34d3020bd0db9a29/src/execution/__tests__/defer-test.ts#L321
+  // notes: duplicating the fragment, whether the one with the @defer directive is first or last
+  // causes the whole query to behave as if nothing is deferred
   it.skip("Can defer a fragment that is also not deferred, deferred fragment is first", () => {
-    // TODO
+    cy.visit('/duplicate-fragment-deferred-first');
   });
   
+  // see notes on test above
   // https://github.com/graphql/graphql-js/blob/a24a9f35b876bdd0d5050eca34d3020bd0db9a29/src/execution/__tests__/defer-test.ts#L359
   it.skip("Can defer a fragment that is also not deferred, non-deferred fragment is first", () => {
-    // TODO
+    cy.visit('/duplicate-fragment-deferred-last');
   });
 
   // https://github.com/graphql/graphql-js/blob/a24a9f35b876bdd0d5050eca34d3020bd0db9a29/src/execution/__tests__/defer-test.ts#L398
-  it.skip("Can defer an inline fragment", () => {
+  it.only("Can defer an inline fragment", () => {
+    cy.visit("/defer-inline-fragment");
+    cy.findByText(/loading/i).should("exist");
+    cy.findByText(/apollo-federation/i).should("exist");
+    cy.findByText(/variation: oss - platform/i).should("not.exist");
+    cy.wait(3000);
+    cy.findByText(/variation: oss - platform/i).should("exist");
+  });
+
+  // TODO: throw errors in resolvers
+  // https://github.com/graphql/graphql-js/blob/a24a9f35b876bdd0d5050eca34d3020bd0db9a29/src/execution/__tests__/defer-test.ts#L230
+  it.skip("Can defer fragments with errors on the top level Query field", () => {
     // TODO
   });
 
@@ -111,17 +131,6 @@ describe("@defer tests", () => {
 
   // https://github.com/graphql/graphql-js/blob/a24a9f35b876bdd0d5050eca34d3020bd0db9a29/src/execution/__tests__/defer-test.ts#L566
   it.skip("Returns payloads from synchronous data in correct order", () => {
-    // TODO
-  });
-
-  // TODO: do we need these last 2?
-  // https://github.com/graphql/graphql-js/blob/a24a9f35b876bdd0d5050eca34d3020bd0db9a29/src/execution/__tests__/defer-test.ts#L660
-  it.skip("original execute function throws error if anything is deferred and everything else is sync", () => {
-    // TODO
-  });
-
-  // https://github.com/graphql/graphql-js/blob/a24a9f35b876bdd0d5050eca34d3020bd0db9a29/src/execution/__tests__/defer-test.ts#L677
-  it.skip("original execute function resolves to error if anything is deferred and something else is async", () => {
     // TODO
   });
 });

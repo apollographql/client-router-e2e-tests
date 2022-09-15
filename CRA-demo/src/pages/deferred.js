@@ -1,17 +1,24 @@
 import React from "react";
 import { gql } from "@apollo/client";
 import Products from "../components/Products";
-import { MY_FRAGMENT } from "../fragments";
 
 const DEFERRED_QUERY = gql`
-  query deferVariation {
+  query TestQuery {
     allProducts {
       ...DimensionsAndVariation @defer
       sku
       id
     }
   }
-  ${MY_FRAGMENT}
+  fragment DimensionsAndVariation on Product {
+    dimensions {
+      size
+    }
+    variation {
+      id
+      name
+    }
+  }
 `;
 
 export default function DeferredQuery() {
