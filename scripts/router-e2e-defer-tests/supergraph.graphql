@@ -25,7 +25,6 @@ directive @tag(name: String!) repeatable on FIELD_DEFINITION | OBJECT | INTERFAC
 scalar join__FieldSet
 
 enum join__Graph {
-  PANDAS @join__graph(name: "pandas", url: "http://pandas:4000/graphql")
   PRODUCTS @join__graph(name: "products", url: "http://products:4000/graphql")
   USERS @join__graph(name: "users", url: "http://users:4000/graphql")
 }
@@ -42,13 +41,6 @@ enum link__Purpose {
   `EXECUTION` features provide metadata necessary for operation execution.
   """
   EXECUTION
-}
-
-type Panda
-  @join__type(graph: PANDAS)
-{
-  name: ID!
-  favoriteFood: String @tag(name: "nom-nom-nom")
 }
 
 type Product implements ProductItf & SkuItf
@@ -98,12 +90,9 @@ type ProductVariation
 }
 
 type Query
-  @join__type(graph: PANDAS)
   @join__type(graph: PRODUCTS)
   @join__type(graph: USERS)
 {
-  allPandas: [Panda] @join__field(graph: PANDAS)
-  panda(name: ID!): Panda @join__field(graph: PANDAS)
   allProducts: [ProductItf] @join__field(graph: PRODUCTS)
   product(id: ID!): ProductItf @join__field(graph: PRODUCTS)
 }
