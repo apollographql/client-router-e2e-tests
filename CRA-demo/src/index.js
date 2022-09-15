@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import "./css/index.css";
-import Layout from "./pages/layout";
+import Layout from "./layout";
 
 // Each page is a separate Cypress test case
 import DeferredQuery from "./pages/deferred";
