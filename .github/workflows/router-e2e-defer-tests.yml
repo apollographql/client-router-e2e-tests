@@ -62,12 +62,12 @@ jobs:
           ( set -x; docker-compose -f scripts/docker-compose.router.yml  up -d )
           sleep 8
           docker-compose -f scripts/docker-compose.router.yml logs
-      - name: Cypress run
-        uses: cypress-io/github-action@v4
-        with:
-          record: false
-          browser: chrome
-          working-directory: CRA-demo
-          command: npm run test
-      - name: docker-compose down
-        run: docker-compose -f scripts/docker-compose.router.yml down
+      # - name: Cypress run
+      #   uses: cypress-io/github-action@v4
+      #   with:
+      #     record: false
+      #     browser: chrome
+      #     working-directory: CRA-demo
+      #     command: npm run test
+      # - name: docker-compose down
+      #   run: docker-compose -f scripts/docker-compose.router.yml down

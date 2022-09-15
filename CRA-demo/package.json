@@ -1,18 +1,21 @@
 {
-  "name": "ac-fed2-example",
+  "name": "router-defer-e2e-tests",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
   "dependencies": {
     "@apollo/client": "3.7.0-beta.7",
     "graphql": "16.6.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-router-dom": "6.4.0",
     "react-scripts": "5.0.1",
     "web-vitals": "3.0.2"
   },
   "scripts": {
     "cy:run": "cypress run",
+    "cy:run-local": "cypress open",
     "test": "start-server-and-test start http://localhost:3000 cy:run",
+    "test:local": "start-server-and-test start http://localhost:3000 cy:run-local",
     "start": "react-scripts start",
     "build": "react-scripts build"
   },

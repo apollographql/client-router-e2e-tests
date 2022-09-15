@@ -60,7 +60,7 @@ const resolvers = {
             r(variation);
           }
           r({ id: "defaultVariation", name: "default variation" });
-        }, 5000)
+        }, 2000) // artificial delay of 2s
       );
     },
     dimensions: () => {

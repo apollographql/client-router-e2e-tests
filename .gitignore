@@ -2,3 +2,4 @@ node_modules
 .DS_Store
 # Cypress test recordings (mp4)
 videos
+screenshots
