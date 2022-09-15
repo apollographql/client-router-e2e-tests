@@ -6,8 +6,10 @@ import "./css/index.css";
 import Layout from "./layout";
 
 // Each page is a separate Cypress test case
-import DeferredQuery from "./pages/deferred";
-import NonDeferredQuery from "./pages/nonDeferred";
+import Deferred from "./pages/deferred";
+import NonDeferred from "./pages/nonDeferred";
+import DisableDefer from "./pages/disableDefer";
+import DisableDeferNullIf from "./pages/disableDeferNullIf";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -16,8 +18,10 @@ root.render(
     <Router>
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route path="/deferred" element={<DeferredQuery />}/>
-          <Route path="/non-deferred" element={<NonDeferredQuery />}/>
+          <Route path="/deferred" element={<Deferred />}/>
+          <Route path="/non-deferred" element={<NonDeferred />}/>
+          <Route path="/disable-defer" element={<DisableDefer />}/>
+          <Route path="/disable-defer-null-if" element={<DisableDeferNullIf />}/>
         </Route>
       </Routes>
     </Router>

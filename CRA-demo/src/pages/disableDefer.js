@@ -3,10 +3,10 @@ import { gql } from "@apollo/client";
 import Products from "../components/Products";
 import { MY_FRAGMENT } from "../fragments";
 
-const NON_DEFERRED_QUERY = gql`
+const DISABLE_DEFER_QUERY = gql`
   query deferVariation {
     allProducts {
-      ...DimensionsAndVariation
+      ...DimensionsAndVariation @defer(if: false)
       sku
       id
     }
@@ -15,5 +15,5 @@ const NON_DEFERRED_QUERY = gql`
 `;
 
 export default function NonDeferredQuery() {
-  return <Products query={NON_DEFERRED_QUERY} />;
+  return <Products query={DISABLE_DEFER_QUERY} />;
 }

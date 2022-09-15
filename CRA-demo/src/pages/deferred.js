@@ -15,10 +15,5 @@ const DEFERRED_QUERY = gql`
 `;
 
 export default function DeferredQuery() {
-  return (
-    <div>
-      <h2>A deferred query 🚀</h2>
-      <Products query={DEFERRED_QUERY} testId={"deferred"} />
-    </div>
-  );
+  return <Products query={DEFERRED_QUERY} />;
 }

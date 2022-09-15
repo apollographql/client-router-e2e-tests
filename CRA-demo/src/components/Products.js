@@ -1,10 +1,10 @@
 import React from "react";
 import { useQuery } from "@apollo/client";
 
-export default function Products({ query, testId }) {
+export default function Products({ query }) {
   const { loading, error, data } = useQuery(query);
   return (
-    <div data-testid={testId}>
+    <div>
       {loading ? <p>Loading...</p> : ""}
       {error ? <p>Error :(</p> : ""}
       {data?.allProducts.map(({ id, sku, dimensions, variation }) => (
