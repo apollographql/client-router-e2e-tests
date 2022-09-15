@@ -26,7 +26,6 @@ scalar join__FieldSet
 
 enum join__Graph {
   PRODUCTS @join__graph(name: "products", url: "http://products:4000/graphql")
-  USERS @join__graph(name: "users", url: "http://users:4000/graphql")
 }
 
 scalar link__Import
@@ -91,10 +90,9 @@ type ProductVariation
 
 type Query
   @join__type(graph: PRODUCTS)
-  @join__type(graph: USERS)
 {
-  allProducts: [ProductItf] @join__field(graph: PRODUCTS)
-  product(id: ID!): ProductItf @join__field(graph: PRODUCTS)
+  allProducts: [ProductItf]
+  product(id: ID!): ProductItf
 }
 
 enum ShippingClass
@@ -112,9 +110,7 @@ interface SkuItf
 
 type User
   @join__type(graph: PRODUCTS, key: "email")
-  @join__type(graph: USERS, key: "email")
 {
-  email: ID! @tag(name: "test-from-users")
+  email: ID!
   totalProductsCreated: Int
-  name: String @join__field(graph: USERS)
 }

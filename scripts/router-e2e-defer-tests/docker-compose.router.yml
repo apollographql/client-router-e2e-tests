@@ -20,6 +20,3 @@ services:
   products:
     container_name: products
     build: ./subgraphs/products
-  users:
-    container_name: users
-    build: ./subgraphs/users

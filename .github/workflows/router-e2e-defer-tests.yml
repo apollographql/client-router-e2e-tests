@@ -65,6 +65,7 @@ jobs:
       - name: Cypress run
         uses: cypress-io/github-action@v4
         with:
+          record: false
           working-directory: CRA-demo
           command: npm run test
       - name: docker-compose down
