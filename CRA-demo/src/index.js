@@ -27,7 +27,7 @@ root.render(
           <Route path="/non-deferred" element={<NonDeferred />}/>
           <Route path="/disable-defer" element={<DisableDefer />}/>
           <Route path="/disable-defer-null-if" element={<DisableDeferNullIf />}/>
-          <Route path="/disable-top-level-query-field" element={<DeferTopLevelQueryField />}/>
+          <Route path="/defer-top-level-query-field" element={<DeferTopLevelQueryField />}/>
           <Route path="/nested-deferred-fragments" element={<NestedDeferredFragments />}/>
           <Route path="/duplicate-fragment-deferred-first" element={<DuplicateFragmentDeferredFirst />}/>
           <Route path="/duplicate-fragment-deferred-last" element={<DuplicateFragmentDeferredLast />}/>
