@@ -26,6 +26,3 @@ services:
   pandas:
     container_name: pandas
     build: ./subgraphs/pandas
-  reviews:
-    container_name: reviews
-    build: ./subgraphs/reviews

@@ -27,7 +27,6 @@ scalar join__FieldSet
 enum join__Graph {
   PANDAS @join__graph(name: "pandas", url: "http://pandas:4000/graphql")
   PRODUCTS @join__graph(name: "products", url: "http://products:4000/graphql")
-  REVIEWS @join__graph(name: "reviews", url: "http://reviews:4000/graphql")
   USERS @join__graph(name: "users", url: "http://users:4000/graphql")
 }
 
@@ -55,23 +54,19 @@ type Panda
 type Product implements ProductItf & SkuItf
   @join__implements(graph: PRODUCTS, interface: "ProductItf")
   @join__implements(graph: PRODUCTS, interface: "SkuItf")
-  @join__implements(graph: REVIEWS, interface: "ProductItf")
   @join__type(graph: PRODUCTS, key: "id")
   @join__type(graph: PRODUCTS, key: "sku package")
   @join__type(graph: PRODUCTS, key: "sku variation { id }")
-  @join__type(graph: REVIEWS, key: "id")
 {
   id: ID! @tag(name: "hi-from-products")
-  sku: String @join__field(graph: PRODUCTS)
-  package: String @join__field(graph: PRODUCTS)
-  variation: ProductVariation @join__field(graph: PRODUCTS)
-  dimensions: ProductDimension @join__field(graph: PRODUCTS)
-  createdBy: User @join__field(graph: PRODUCTS)
-  hidden: String @join__field(graph: PRODUCTS)
-  reviewsScore: Float! @join__field(graph: REVIEWS, override: "products")
-  oldField: String @join__field(graph: PRODUCTS)
-  reviewsCount: Int! @join__field(graph: REVIEWS)
-  reviews: [Review!]! @join__field(graph: REVIEWS)
+  sku: String
+  package: String
+  variation: ProductVariation
+  dimensions: ProductDimension
+  createdBy: User
+  hidden: String
+  reviewsScore: Float!
+  oldField: String
 }
 
 type ProductDimension
@@ -84,19 +79,15 @@ type ProductDimension
 interface ProductItf implements SkuItf
   @join__implements(graph: PRODUCTS, interface: "SkuItf")
   @join__type(graph: PRODUCTS)
-  @join__type(graph: REVIEWS)
 {
   id: ID!
-  sku: String @join__field(graph: PRODUCTS)
-  package: String @join__field(graph: PRODUCTS)
-  variation: ProductVariation @join__field(graph: PRODUCTS)
-  dimensions: ProductDimension @join__field(graph: PRODUCTS)
-  createdBy: User @join__field(graph: PRODUCTS)
-  hidden: String @inaccessible @join__field(graph: PRODUCTS)
-  oldField: String @deprecated(reason: "refactored out") @join__field(graph: PRODUCTS)
-  reviewsCount: Int! @join__field(graph: REVIEWS)
-  reviewsScore: Float! @join__field(graph: REVIEWS)
-  reviews: [Review!]! @join__field(graph: REVIEWS)
+  sku: String
+  package: String
+  variation: ProductVariation
+  dimensions: ProductDimension
+  createdBy: User
+  hidden: String @inaccessible
+  oldField: String @deprecated(reason: "refactored out")
 }
 
 type ProductVariation
@@ -109,21 +100,12 @@ type ProductVariation
 type Query
   @join__type(graph: PANDAS)
   @join__type(graph: PRODUCTS)
-  @join__type(graph: REVIEWS)
   @join__type(graph: USERS)
 {
   allPandas: [Panda] @join__field(graph: PANDAS)
   panda(name: ID!): Panda @join__field(graph: PANDAS)
   allProducts: [ProductItf] @join__field(graph: PRODUCTS)
   product(id: ID!): ProductItf @join__field(graph: PRODUCTS)
-  review(id: Int!): Review @join__field(graph: REVIEWS)
-}
-
-type Review
-  @join__type(graph: REVIEWS)
-{
-  id: Int!
-  body: String!
 }
 
 enum ShippingClass
