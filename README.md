@@ -25,12 +25,14 @@ This will open the Cypress GUI where you can run, re-run and inspect the E2E tes
 Finally, to stop running `apollo-router`:
 
 ```
-$ cd scripts && make docker-compose-down
+$ npm run router:down
 ```
 
 ### Running GitHub workflows with `act`
 
-The GitHub workflows in this repository can also be executed with [`act`](https://github.com/nektos/act) for fast iteration during development.
+The GitHub actions workflows in this repository can also be run with [`act`](https://github.com/nektos/act) for fast iteration during local development.
+
+For example, to run the `ci-docker-local` job in `.github/workflows/router-e2e-defer-tests.yml`:
 
 ```
 $ brew install act
@@ -39,4 +41,4 @@ $ act -j ci-docker-local
 
 On M1 macs, run `act` with the `--container-architecture linux/amd64` flag.
 
-> NB: there is a bug in `act` that throws an error when running dockerized Cypress locally. As a stop gap, if your apollo-router is already running (cd ) you can then run `npm run test:local` which will bring up the Cypress GUI.
+> NB: there is a bug in `act` that throws an error when running dockerized Cypress locally. Instead, follow the instructions above to run `apollo-router` locally followed by `npm run test:local` which will bring up the Cypress GUI.
