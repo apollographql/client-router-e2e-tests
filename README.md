@@ -4,6 +4,8 @@
 
 A series of E2E tests that run on push to the `main` branch of this repository and when PRs are opened against `main`.
 
+For more information about the test suite, please see [`CRA-demo/README.md`](CRA-demo/README.md).
+
 ## Running `apollo-router` and Cypress tests locally
 
 After cloning this repository run, the following commands to run the router:
