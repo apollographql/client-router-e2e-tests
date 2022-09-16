@@ -37,7 +37,7 @@ describe("@defer tests", () => {
     cy.findByText(/variation: oss - platform/i).should("exist");
   });
 
-  // currently failing
+  // currently failing: https://github.com/apollographql/router/issues/1820
   // https://github.com/graphql/graphql-js/blob/a24a9f35b876bdd0d5050eca34d3020bd0db9a29/src/execution/__tests__/defer-test.ts#L167
   it.skip("Does not disable defer with null if argument", () => {
     cy.visit("/disable-defer-null-if");
@@ -54,7 +54,7 @@ describe("@defer tests", () => {
     cy.findByText(/variation: oss - platform/i).should("exist");
   });
 
-  // currently failing
+  // currently failing: https://github.com/apollographql/router/issues/1800
   // https://github.com/graphql/graphql-js/blob/a24a9f35b876bdd0d5050eca34d3020bd0db9a29/src/execution/__tests__/defer-test.ts#L196
   it.skip("Can defer fragments on the top level Query field", () => {
     cy.visit('/defer-top-level-query-field');

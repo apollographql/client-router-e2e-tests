@@ -11,18 +11,16 @@ For more information about the test suite, please see [`CRA-demo/README.md`](CRA
 After cloning this repository run, the following commands to run the router:
 
 ```
-$ cd scripts
-$ make docker-build-local-router && make docker-up-local-router
+$ cd CRA-demo && npm run router:up
 ```
 
-To run the E2E tests, run the following from the root of the repository (`cd ..` from inside of `scripts`):
+To run the E2E tests in headful mode, run the following from the `CRA-demo` directory:
 
 ```
-$ cd CRA-demo
 $ npm i && npm run test:local
 ```
 
-This will open the Cypress GUI where you can run, re-run and inspect the E2E test results.
+This will open the Cypress GUI where you can run, re-run and inspect the E2E test results. (To run in headless mode, run `npm run test`.)
 
 Finally, to stop running `apollo-router`:
 

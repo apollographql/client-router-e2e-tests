@@ -17,7 +17,9 @@
     "test": "start-server-and-test start http://localhost:3000 cy:run",
     "test:local": "start-server-and-test start http://localhost:3000 cy:run-local",
     "start": "react-scripts start",
-    "build": "react-scripts build"
+    "build": "react-scripts build",
+    "router:up": "cd ../scripts && make docker-build-local-router && make docker-up-local-router && cd ../CRA-demo",
+    "router:down": "cd ../scripts && make docker-compose-down && cd ../CRA-demo"
   },
   "eslintConfig": {
     "extends": [
