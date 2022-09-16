@@ -6,8 +6,6 @@ on:
       - main
   pull_request:
     branches: [main]
-  schedule:
-    - cron: "30 7 * * *"
 
 jobs:
   ci-docker-local:
@@ -16,19 +14,15 @@ jobs:
     steps:
       - name: checkout
         uses: actions/checkout@v3
+
       - name: install rover
         run: |
-          echo ---------------------------------------------------------------
-          echo rover - installing ...
-          echo ---------------------------------------------------------------
           curl -sSL https://rover.apollo.dev/nix/latest | sh -s -- --elv2-license accept
           echo "$HOME/.rover/bin" >> ${GITHUB_PATH}
+
       - name: update docker-compose
         run: |
           which docker-compose && exit 0 || true
-          echo ---------------------------------------------------------------
-          echo docker-compose - installing ...
-          echo ---------------------------------------------------------------
           BIN_DIR=$HOME/.docker-compose/bin
           FILE=$BIN_DIR/docker-compose
           mkdir -p $BIN_DIR
@@ -39,6 +33,7 @@ jobs:
           echo "$BIN_DIR" >> ${GITHUB_PATH}
           set +x
           echo ---------------------------------------------------------------
+
       - name: check tools
         run: |
           echo ---------------------------------------------------------------
@@ -48,26 +43,20 @@ jobs:
           ( set -x; which docker-compose )
           echo "$(docker-compose --version)"
           echo ---------------------------------------------------------------
-      - name: make supergraph
-        run: |
-          cd scripts
-          make supergraph
-          cat ./supergraph.graphql
-          cd ../../
-      - name: docker-compose build
-        run: |
-          ( set -x; docker-compose -f scripts/docker-compose.router.yml build --no-cache --pull --parallel --progress plain )
-      - name: docker-compose up -d
-        run: |
-          ( set -x; docker-compose -f scripts/docker-compose.router.yml  up -d )
-          sleep 8
-          docker-compose -f scripts/docker-compose.router.yml logs
-      - name: Cypress run
+
+      - name: docker-build-local-router
+        run: cd scripts && make docker-build-local-router
+
+      - name: docker-up-local-router
+        run: cd scripts && make docker-up-local-router
+
+      - name: cypress run
         uses: cypress-io/github-action@v4
         with:
           record: false
           browser: chrome
           working-directory: CRA-demo
           command: npm run test
-      - name: docker-compose down
-        run: docker-compose -f scripts/docker-compose.router.yml down
+
+      - name: docker-compose-down
+        run: cd scripts && make docker-compose-down
