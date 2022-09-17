@@ -8,7 +8,7 @@ For more information about the test suite, please see [`CRA-demo/README.md`](CRA
 
 ## Running `apollo-router` and Cypress tests locally
 
-After cloning this repository run, the following commands to run the router:
+After cloning this repository, run the following commands to run the router:
 
 ```
 $ cd CRA-demo && npm run router:up
@@ -20,7 +20,7 @@ To run the E2E tests in headful mode, run the following from the `CRA-demo` dire
 $ npm i && npm run test:local
 ```
 
-This will open the Cypress GUI where you can run, re-run and inspect the E2E test results. (To run in headless mode, run `npm run test`.)
+This will open the Cypress GUI which allows you to run the test suite and inspect the results. (To run in headless mode, run `npm run test`.)
 
 Finally, to stop running `apollo-router`:
 
