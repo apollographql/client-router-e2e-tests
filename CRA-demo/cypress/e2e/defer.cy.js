@@ -6,7 +6,7 @@ describe("@defer tests", () => {
     // query is still pending in its entirety (since @defer is absent)
     cy.findByText(/loading/i).should("exist");
     cy.wait(2000);
-    cy.findByText(/apollo-federation/i).should("not.exist");
+    cy.findByText(/apollo-federation/i, { timeout: 1 }).should("not.exist");
     cy.wait(1500);
     cy.findAllByText(/apollo-federation/i).should("exist");
     cy.findAllByText(/variation: oss - platform/i).should("exist");
@@ -31,7 +31,7 @@ describe("@defer tests", () => {
     // defer is disabled so entire query should pend for >2s
     cy.findByText(/loading/i).should("exist");
     cy.wait(2000);
-    cy.findByText(/apollo-federation/i).should("not.exist");
+    cy.findByText(/apollo-federation/i, { timeout: 1 }).should("not.exist");
     cy.wait(1500);
     cy.findAllByText(/apollo-federation/i).should("exist");
     cy.findAllByText(/variation: oss - platform/i).should("exist");
@@ -68,9 +68,8 @@ describe("@defer tests", () => {
     // when the query has the same fragment twice, once with @defer and once without
     // it also effectively behaves like a non-deferred query, since the first chunk will
     // contain the un-deferred fragment, and the second chunk the deferred fragment
-    cy.findByText(/loading/i).should("exist");
     cy.wait(2000);
-    cy.findByText(/apollo-federation/i).should("not.exist");
+    cy.findByText(/apollo-federation/i, { timeout: 1 }).should("not.exist");
     cy.wait(1500);
     cy.findAllByText(/apollo-federation/i).should("exist");
     cy.findAllByText(/variation: oss - platform/i).should("exist");
@@ -83,9 +82,8 @@ describe("@defer tests", () => {
     // when the query has the same fragment twice, once with @defer and once without
     // it also effectively behaves like a non-deferred query, since the first chunk will
     // contain the un-deferred fragment, and the second chunk the deferred fragment
-    cy.findByText(/loading/i).should("exist");
     cy.wait(2000);
-    cy.findByText(/apollo-federation/i).should("not.exist");
+    cy.findByText(/apollo-federation/i, { timeout: 1 }).should("not.exist");
     cy.wait(1500);
     cy.findAllByText(/apollo-federation/i).should("exist");
     cy.findAllByText(/variation: oss - platform/i).should("exist");
