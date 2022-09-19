@@ -27,11 +27,18 @@ const products = [
     oldField: "deprecated",
   },
   { id: "apollo-studio", sku: "studio", package: "", oldField: "deprecated" },
+  {
+    id: "apollo-client",
+    sku: "client",
+    package: "@apollo/client",
+    oldField: "deprecated",
+  },
 ];
 
 const variationByProduct = [
   { id: "apollo-federation", variation: { id: "OSS", name: "platform" } },
   { id: "apollo-studio", variation: { id: "platform", name: "platform-name" } },
+  { id: "apollo-client", variation: { id: "OSS", name: "client" } },
 ];
 
 const typeDefs = gql(readFileSync("./products.graphql", { encoding: "utf-8" }));
@@ -51,20 +58,30 @@ const resolvers = {
   },
   Product: {
     variation: (reference) => {
-      return new Promise((r) =>
-        setTimeout(() => {
-          if (reference.id) {
-            const variation = variationByProduct.find(
-              (p) => p.id == reference.id
-            ).variation;
-            r(variation);
-          }
-          r({ id: "defaultVariation", name: "default variation" });
-        }, 2000) // artificial delay of 2s
+      return new Promise(
+        (r) =>
+          setTimeout(() => {
+            if (reference.id) {
+              const variation = variationByProduct.find(
+                (p) => p.id == reference.id
+              ).variation;
+              r(variation);
+            }
+            r({ id: "defaultVariation", name: "default variation" });
+          }, 2000) // artificial delay of 2s
       );
     },
     dimensions: () => {
       return { size: "1", weight: 1 };
+    },
+    errorField: () => {
+      throw new Error("Error field");
+    },
+    nonNullErrorField: () => {
+      return null;
+    },
+    promiseNonNullErrorField: () => {
+      return Promise.resolve(null);
     },
     createdBy: (reference) => {
       return { email: "support@apollographql.com", totalProductsCreated: 1337 };
