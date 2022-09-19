@@ -68,7 +68,7 @@ describe("@defer tests", () => {
     // when the query has the same fragment twice, once with @defer and once without
     // it also effectively behaves like a non-deferred query, since the first chunk will
     // contain the un-deferred fragment, and the second chunk the deferred fragment
-    cy.wait(2000);
+    cy.wait(1500);
     cy.findByText(/apollo-federation/i, { timeout: 1 }).should("not.exist");
     cy.wait(1500);
     cy.findAllByText(/apollo-federation/i).should("exist");
@@ -82,7 +82,7 @@ describe("@defer tests", () => {
     // when the query has the same fragment twice, once with @defer and once without
     // it also effectively behaves like a non-deferred query, since the first chunk will
     // contain the un-deferred fragment, and the second chunk the deferred fragment
-    cy.wait(2000);
+    cy.wait(1500);
     cy.findByText(/apollo-federation/i, { timeout: 1 }).should("not.exist");
     cy.wait(1500);
     cy.findAllByText(/apollo-federation/i).should("exist");
