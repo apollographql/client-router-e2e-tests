@@ -1,0 +1,48 @@
+{
+  "main": "index.html",
+  "private": true,
+  "name": "apollo-elements-app",
+  "version": "1.0.0",
+  "type": "module",
+  "author": "",
+  "license": "ISC",
+  "description": "Apollo Elements App",
+  "scripts": {
+    "start": "run-p start:*",
+    "start:codegen": "graphql-codegen --watch",
+    "start:serve": "wds --watch --open",
+    "router:up": "cd ../scripts && make docker-build-local-router && make docker-up-local-router && cd ../apollo-elements-demo",
+    "router:down": "cd ../scripts && make docker-compose-down && cd ../apollo-elements-demo",
+    "lint": "eslint",
+    "build": "run-s build:*",
+    "build:codegen": "graphql-codegen",
+    "build:rollup": "rollup -c",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@apollo-elements/components": "^3.0.1",
+    "@apollo-elements/core": "^2.1.1",
+    "@apollo/client": "^3.7.0-beta.7",
+    "pwa-helpers": "^0.9.1"
+  },
+  "devDependencies": {
+    "@apollo-elements/create": "^4.0.1",
+    "@graphql-codegen/cli": "^2.3.1",
+    "@graphql-codegen/near-operation-file-preset": "^2.2.2",
+    "@graphql-codegen/typed-document-node": "^2.2.1",
+    "@graphql-codegen/typescript": "^2.4.2",
+    "@graphql-codegen/typescript-operations": "^2.2.1",
+    "@pwrs/eslint-config": "^0.x",
+    "@rollup/plugin-node-resolve": "^11.x",
+    "@web/dev-server": "^0.1.x",
+    "@web/dev-server-esbuild": "^0.2.x",
+    "@web/dev-server-rollup": "^0.3.x",
+    "@web/rollup-plugin-html": "^1.x",
+    "npm-run-all": "^4.x",
+    "rollup": "^2.x",
+    "rollup-plugin-esbuild": "^2.x",
+    "rollup-plugin-lit-css": "^2.x",
+    "typescript": "^4.x"
+  },
+  "keywords": []
+}

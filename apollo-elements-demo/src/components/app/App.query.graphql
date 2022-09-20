@@ -1,0 +1,20 @@
+query AppQuery {
+  location @client { pathname }
+}
+
+query TestDeferQuery {
+  allProducts {
+    ...DimensionsAndVariation @defer
+    sku
+    id
+  }
+}
+fragment DimensionsAndVariation on Product {
+  dimensions {
+    size
+  }
+  variation {
+    id
+    name
+  }
+}
