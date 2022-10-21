@@ -141,7 +141,6 @@ describe("@defer tests", () => {
   // https://github.com/graphql/graphql-js/blob/a24a9f35b876bdd0d5050eca34d3020bd0db9a29/src/execution/__tests__/defer-test.ts#L230
   it("Can defer fragments with errors on the top level Query field", () => {
     cy.visit("/error-top-level-query-field");
-    cy.findByText(/loading/i).should("exist");
     cy.findByText(/Error :\(/i).should("exist");
     cy.findAllByText(/apollo-federation/i).should("not.exist");
     cy.findAllByText(/apollo-studio/i).should("not.exist");
