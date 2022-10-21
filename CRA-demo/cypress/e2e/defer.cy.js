@@ -117,27 +117,43 @@ describe("@defer tests", () => {
     cy.findAllByText(/apollo-federation/i).should("not.exist");
   });
 
-  // // router issue: https://github.com/apollographql/router/issues/1820
-  // // https://github.com/graphql/graphql-js/blob/a24a9f35b876bdd0d5050eca34d3020bd0db9a29/src/execution/__tests__/defer-test.ts#L167
-  // it("Does not disable defer with null if argument", () => {
-  //   cy.visit("/disable-defer-null-if");
-  // });
+  // https://github.com/graphql/graphql-js/blob/a24a9f35b876bdd0d5050eca34d3020bd0db9a29/src/execution/__tests__/defer-test.ts#L167
+  it("Does not disable defer with null if argument", () => {
+    cy.visit("/disable-defer-null-if");
+    cy.findByText(/loading/i).should("exist");
+    cy.findByText(/apollo-federation/i, { timeout: 1000 }).should("exist");
+    cy.findByText(/variation: oss - platform/i).should("not.exist");
+    cy.wait(3000);
+    cy.findAllByText(/variation: oss - platform/i).should("exist");
+  });
 
-  // // router issue: https://github.com/apollographql/router/issues/1800
-  // // https://github.com/graphql/graphql-js/blob/a24a9f35b876bdd0d5050eca34d3020bd0db9a29/src/execution/__tests__/defer-test.ts#L196
-  // it("Can defer fragments on the top level Query field", () => {
-  //   cy.visit('/defer-top-level-query-field');
-  // });
+  // https://github.com/graphql/graphql-js/blob/a24a9f35b876bdd0d5050eca34d3020bd0db9a29/src/execution/__tests__/defer-test.ts#L196
+  it("Can defer fragments on the top level Query field", () => {
+    cy.visit("/defer-top-level-query-field");
+    cy.findByText(/loading/i).should("exist");
+    cy.wait(2000);
+    cy.findByText(/apollo-federation/i, { timeout: 1 }).should("not.exist");
+    cy.wait(1500);
+    cy.findAllByText(/apollo-federation/i).should("exist");
+    cy.findAllByText(/variation: oss - platform/i).should("exist");
+  });
 
-  // // router issue: https://github.com/apollographql/router/issues/1800
-  // // https://github.com/graphql/graphql-js/blob/a24a9f35b876bdd0d5050eca34d3020bd0db9a29/src/execution/__tests__/defer-test.ts#L230
-  // it("Can defer fragments with errors on the top level Query field", () => {
-  //   cy.visit('/error-top-level-query-field');
-  // });
+  // https://github.com/graphql/graphql-js/blob/a24a9f35b876bdd0d5050eca34d3020bd0db9a29/src/execution/__tests__/defer-test.ts#L230
+  it("Can defer fragments with errors on the top level Query field", () => {
+    cy.visit("/error-top-level-query-field");
+    cy.findByText(/loading/i).should("exist");
+    cy.findByText(/Error :\(/i).should("exist");
+    cy.findAllByText(/apollo-federation/i).should("not.exist");
+    cy.findAllByText(/apollo-studio/i).should("not.exist");
+    cy.findAllByText(/apollo-client/i).should("not.exist");
+  });
 
-  // // router issue: https://github.com/apollographql/router/issues/1834
-  // // https://github.com/graphql/graphql-js/blob/a24a9f35b876bdd0d5050eca34d3020bd0db9a29/src/execution/__tests__/defer-test.ts#L529
+  // router issue: https://github.com/apollographql/router/issues/1834
+  // https://github.com/graphql/graphql-js/blob/a24a9f35b876bdd0d5050eca34d3020bd0db9a29/src/execution/__tests__/defer-test.ts#L529
   // it("Handles async non-nullable errors thrown in deferred fragments", () => {
-  //   cy.visit('/error-async-non-nullable-in-deferred-fragment');
+  //   cy.visit("/error-async-non-nullable-in-deferred-fragment");
+  //   cy.findByText(/loading/i).should("exist");
+  //   cy.findByText(/Error :\(/i).should("exist");
+  //   cy.findAllByText(/apollo-federation/i).should("not.exist");
   // });
 });
