@@ -3,13 +3,19 @@
   "version": "0.1.0",
   "private": false,
   "dependencies": {
-    "@apollo/client": "3.7.0-beta.7",
+    "@apollo/client": "3.7.1",
     "graphql": "16.6.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "react-router-dom": "6.4.0",
+    "react-router-dom": "6.4.2",
     "react-scripts": "5.0.1",
-    "web-vitals": "3.0.2"
+    "web-vitals": "3.0.4"
+  },
+  "devDependencies": {
+    "@testing-library/cypress": "8.0.3",
+    "cypress": "10.10.0",
+    "eslint-plugin-cypress": "2.12.1",
+    "start-server-and-test": "1.14.0"
   },
   "scripts": {
     "cy:run": "cypress run",
@@ -42,11 +48,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "@testing-library/cypress": "8.0.3",
-    "cypress": "10.8.0",
-    "eslint-plugin-cypress": "2.12.1",
-    "start-server-and-test": "1.14.0"
   }
 }
