@@ -9,7 +9,13 @@ export default function Products({ query }) {
       {error ? <p>Error :(</p> : ""}
       {data?.allProducts.map(({ id, sku, dimensions, variation }) => (
         <div key={id}>
-          {id && sku ? <b>{id} - {sku}</b> : ''}
+          {id && sku ? (
+            <b>
+              {id} - {sku}
+            </b>
+          ) : (
+            ""
+          )}
           <p>{dimensions ? <span>Size: {dimensions.size}</span> : ""}</p>
           <p>
             {variation ? (
