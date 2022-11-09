@@ -21,6 +21,9 @@ import ErrorNonNullableInDeferredFragment from "./pages/errorNonNullableInDeferr
 import ErrorNonNullableOutsideDeferredFragment from "./pages/errorNonNullableOutsideDeferredFragment";
 import ErrorTopLevelQueryField from "./pages/errorTopLevelQueryField";
 
+// mutation testing
+import PurchasePage from "./pages/purchase";
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
@@ -74,6 +77,10 @@ root.render(
           <Route
             path="/error-top-level-query-field"
             element={<ErrorTopLevelQueryField />}
+          />
+          <Route
+            path="/purchase"
+            element={<PurchasePage />}
           />
         </Route>
       </Routes>
