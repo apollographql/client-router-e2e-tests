@@ -1,4 +1,3 @@
-
 schema
   @link(url: "https://specs.apollo.dev/link/v1.0")
   @link(url: "https://specs.apollo.dev/join/v0.2", for: EXECUTION)
@@ -6,6 +5,7 @@ schema
   @link(url: "https://specs.apollo.dev/inaccessible/v0.2", for: SECURITY)
 {
   query: Query
+  mutation: Mutation
 }
 
 directive @inaccessible on FIELD_DEFINITION | OBJECT | INTERFACE | UNION | ARGUMENT_DEFINITION | SCALAR | ENUM | ENUM_VALUE | INPUT_OBJECT | INPUT_FIELD_DEFINITION
@@ -26,6 +26,7 @@ scalar join__FieldSet
 
 enum join__Graph {
   PRODUCTS @join__graph(name: "products", url: "http://products:4000/graphql")
+  USERS @join__graph(name: "users", url: "http://users:4000/graphql")
 }
 
 scalar link__Import
@@ -40,6 +41,61 @@ enum link__Purpose {
   `EXECUTION` features provide metadata necessary for operation execution.
   """
   EXECUTION
+}
+
+type MakePaymentResult
+  @join__type(graph: USERS)
+{
+  id: ID!
+  user: PaymentUser!
+  paymentStatus: PaymentStatus
+}
+
+type Mutation
+  @join__type(graph: USERS)
+{
+  makePayment(userId: ID!, paymentInformation: PaymentInformationInput!): MakePaymentResult!
+}
+
+type PaymentFailed implements PaymentStatus
+  @join__implements(graph: USERS, interface: "PaymentStatus")
+  @join__type(graph: USERS)
+{
+  id: ID!
+  reason: String!
+}
+
+input PaymentInformationInput
+  @join__type(graph: USERS)
+{
+  fakeInfo: String!
+}
+
+interface PaymentStatus
+  @join__type(graph: USERS)
+{
+  id: ID!
+}
+
+type PaymentSuccess implements PaymentStatus
+  @join__implements(graph: USERS, interface: "PaymentStatus")
+  @join__type(graph: USERS)
+{
+  id: ID!
+  billedAmount: Float!
+}
+
+type PaymentUser
+  @join__type(graph: USERS)
+{
+  id: ID!
+  name: String!
+  email: String
+  username: String!
+  friends(first: Int = 10, after: Int = 0): [PaymentUser!]
+  phoneNumber: String
+  title: String
+  avatarUrl: String
 }
 
 type Product implements ProductItf & SkuItf
@@ -96,9 +152,13 @@ type ProductVariation
 
 type Query
   @join__type(graph: PRODUCTS)
+  @join__type(graph: USERS)
 {
-  allProducts: [ProductItf]
-  product(id: ID!): ProductItf
+  allProducts: [ProductItf] @join__field(graph: PRODUCTS)
+  product(id: ID!): ProductItf @join__field(graph: PRODUCTS)
+  user(id: ID!): PaymentUser! @join__field(graph: USERS)
+  getPaymentStatus: PaymentStatus! @join__field(graph: USERS)
+  users: [PaymentUser!]! @join__field(graph: USERS)
 }
 
 interface SkuItf

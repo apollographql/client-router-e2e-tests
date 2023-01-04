@@ -20,6 +20,7 @@ import ErrorInDeferredFragment from "./pages/errorInDeferredFragment";
 import ErrorNonNullableInDeferredFragment from "./pages/errorNonNullableInDeferredFragment";
 import ErrorNonNullableOutsideDeferredFragment from "./pages/errorNonNullableOutsideDeferredFragment";
 import ErrorTopLevelQueryField from "./pages/errorTopLevelQueryField";
+import DeferredMutation from "./pages/deferredMutation";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -75,6 +76,7 @@ root.render(
             path="/error-top-level-query-field"
             element={<ErrorTopLevelQueryField />}
           />
+          <Route path="/deferred-mutation" element={<DeferredMutation />} />
         </Route>
       </Routes>
     </Router>
