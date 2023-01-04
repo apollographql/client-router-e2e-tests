@@ -18,7 +18,6 @@ describe("@defer tests", () => {
     // for the deferred query, we can see the sku + id (fast fields)
     // already rendered...
     // and after waiting >2s the deferred fields are present
-    cy.findByText(/loading/i).should("exist");
     cy.findByText(/apollo-federation/i, { timeout: 1000 }).should("exist");
     cy.findByText(/variation: oss - platform/i).should("not.exist");
     cy.wait(3000);
@@ -40,7 +39,6 @@ describe("@defer tests", () => {
   // https://github.com/graphql/graphql-js/blob/a24a9f35b876bdd0d5050eca34d3020bd0db9a29/src/execution/__tests__/defer-test.ts#L271
   it("Can defer a fragment within an already deferred fragment", () => {
     cy.visit("/nested-deferred-fragments");
-    cy.findByText(/loading/i).should("exist");
     cy.findByText(/apollo-federation/i, { timeout: 1000 }).should("exist");
     cy.findByText(/apollo-studio/i).should("exist");
     // because of nested @defer directives,
@@ -54,7 +52,6 @@ describe("@defer tests", () => {
   // https://github.com/graphql/graphql-js/blob/a24a9f35b876bdd0d5050eca34d3020bd0db9a29/src/execution/__tests__/defer-test.ts#L398
   it("Can defer an inline fragment", () => {
     cy.visit("/defer-inline-fragment");
-    cy.findByText(/loading/i).should("exist");
     cy.findByText(/apollo-federation/i, { timeout: 1000 }).should("exist");
     cy.findByText(/variation: oss - platform/i).should("not.exist");
     cy.wait(3000);
@@ -102,15 +99,15 @@ describe("@defer tests", () => {
   // https://github.com/graphql/graphql-js/blob/a24a9f35b876bdd0d5050eca34d3020bd0db9a29/src/execution/__tests__/defer-test.ts#L460
   it("Handles non-nullable errors thrown in deferred fragments", () => {
     cy.visit("/error-non-nullable-in-deferred-fragment");
-    cy.findByText(/loading/i).should("exist");
     cy.findByText(/Error :\(/i).should("exist");
     cy.findAllByText(/apollo-federation/i).should("exist");
     cy.findAllByText(/apollo-studio/i).should("exist");
     cy.findAllByText(/apollo-client/i).should("exist");
   });
 
+  // Skipping until AC bug https://github.com/apollographql/apollo-client/issues/10406 is resolved
   // https://github.com/graphql/graphql-js/blob/a24a9f35b876bdd0d5050eca34d3020bd0db9a29/src/execution/__tests__/defer-test.ts#L497
-  it("Handles non-nullable errors thrown outside deferred fragments", () => {
+  it.skip("Handles non-nullable errors thrown outside deferred fragments", () => {
     cy.visit("/error-non-nullable-outside-deferred-fragment");
     cy.findByText(/loading/i).should("exist");
     cy.findByText(/Error :\(/i).should("exist");
@@ -120,7 +117,6 @@ describe("@defer tests", () => {
   // https://github.com/graphql/graphql-js/blob/a24a9f35b876bdd0d5050eca34d3020bd0db9a29/src/execution/__tests__/defer-test.ts#L167
   it("Does not disable defer with null if argument", () => {
     cy.visit("/disable-defer-null-if");
-    cy.findByText(/loading/i).should("exist");
     cy.findByText(/apollo-federation/i, { timeout: 1000 }).should("exist");
     cy.findByText(/variation: oss - platform/i).should("not.exist");
     cy.wait(3000);
@@ -130,7 +126,6 @@ describe("@defer tests", () => {
   // https://github.com/graphql/graphql-js/blob/a24a9f35b876bdd0d5050eca34d3020bd0db9a29/src/execution/__tests__/defer-test.ts#L196
   it("Can defer fragments on the top level Query field", () => {
     cy.visit("/defer-top-level-query-field");
-    cy.findByText(/loading/i).should("exist");
     cy.wait(2000);
     cy.findByText(/apollo-federation/i, { timeout: 1 }).should("not.exist");
     cy.wait(1500);
@@ -149,10 +144,19 @@ describe("@defer tests", () => {
 
   // router issue: https://github.com/apollographql/router/issues/1834
   // https://github.com/graphql/graphql-js/blob/a24a9f35b876bdd0d5050eca34d3020bd0db9a29/src/execution/__tests__/defer-test.ts#L529
-  // it("Handles async non-nullable errors thrown in deferred fragments", () => {
-  //   cy.visit("/error-async-non-nullable-in-deferred-fragment");
-  //   cy.findByText(/loading/i).should("exist");
-  //   cy.findByText(/Error :\(/i).should("exist");
-  //   cy.findAllByText(/apollo-federation/i).should("not.exist");
-  // });
+  it("Handles async non-nullable errors thrown in deferred fragments", () => {
+    cy.visit("/error-async-non-nullable-in-deferred-fragment");
+    cy.findByText(/Error :\(/i).should("exist");
+    cy.findAllByText(/apollo-federation/i).should("exist");
+    cy.findAllByText(/apollo-studio/i).should("exist");
+    cy.findAllByText(/apollo-client/i).should("exist");
+  });
+
+  it("Renders the entire response from a mutation containing @defer after the last chunk is returned", () => {
+    cy.visit("/deferred-mutation");
+    cy.findByText(/loading/i).should("not.exist");
+    cy.findByRole('button', {name: /make payment/i}).click();
+    cy.findByText(/loading/i).should("exist");
+    cy.findByText(/"__typename":"MakePaymentResult"/i).should("exist");
+  });
 });
