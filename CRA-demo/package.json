@@ -15,7 +15,7 @@
     "@testing-library/cypress": "9.0.0",
     "cypress": "12.3.0",
     "eslint-plugin-cypress": "2.12.1",
-    "start-server-and-test": "1.15.2"
+    "start-server-and-test": "1.15.3"
   },
   "scripts": {
     "cy:run": "cypress run",
