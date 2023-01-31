@@ -22,7 +22,7 @@ import ErrorNonNullableOutsideDeferredFragment from "./pages/errorNonNullableOut
 import ErrorTopLevelQueryField from "./pages/errorTopLevelQueryField";
 import DeferredMutation from "./pages/deferredMutation";
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
+const root = ReactDOM.createRoot(document.getElementById("root") as any);
 
 root.render(
   <React.StrictMode>
