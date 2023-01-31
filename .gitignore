@@ -3,3 +3,5 @@ node_modules
 # Cypress test recordings (mp4)
 videos
 screenshots
+build
+tsconfig.tsbuildinfo
