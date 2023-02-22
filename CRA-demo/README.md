@@ -27,5 +27,3 @@ Starts the development server and runs Cypress tests in headless mode via `cypre
 ### `npm run test:local`
 
 ~Starts the development server and runs Cypress tests in a headful browser via `cypress open`. This opens the Cypress GUI where you can run, re-run and inspect the E2E test results.~
-
-Update: `start-server-and-test` now seems to be getting stuck at the webpack compile success message before kicking off the test suite. As a workaround, run `npm start` in one terminal window, then open a separate window and run `npx cypress open` to open the Cypress UI or `npx cypress run` to run the tests in headless mode.
