@@ -1,6 +1,6 @@
 # Client Router E2E Tests
 
-![Client Router E2E Tests](https://github.com/alessbell/client-router-e2e-tests/actions/workflows/router-e2e-defer-tests.yml/badge.svg)
+![Client Router E2E Tests](https://github.com/apollographql/client-router-e2e-tests/actions/workflows/router-e2e-defer-tests.yml/badge.svg)
 
 A series of E2E tests that run on push to the `main` branch of this repository and when PRs are opened against `main`.
 
