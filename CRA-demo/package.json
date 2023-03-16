@@ -29,7 +29,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "router:up": "cd ../scripts && make docker-build-local-router && make docker-up-local-router && cd ../CRA-demo",
-    "router:down": "cd ../scripts && make docker-compose-down && cd ../CRA-demo"
+    "router:down": "cd ../scripts && make docker-compose-down && cd ../CRA-demo",
+    "router:restart": "npm run router:down && npm run router:up"
   },
   "eslintConfig": {
     "extends": [

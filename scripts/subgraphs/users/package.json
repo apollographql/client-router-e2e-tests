@@ -10,9 +10,10 @@
     "@apollo/subgraph": "2.3.5",
     "@apollo/server": "4.0.0",
     "@faker-js/faker": "^7.6.0",
-    "supergraph-demo-opentelemetry": "0.2.4",
     "graphql": "16.6.0",
-    "uuid": "^9.0.0"
+    "graphql-tag": "2.12.6",
+    "supergraph-demo-opentelemetry": "0.2.4",
+    "uuid": "9.0.0"
   },
   "keywords": [],
   "author": "",
