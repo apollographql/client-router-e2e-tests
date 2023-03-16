@@ -1,10 +1,16 @@
+const { ApolloOpenTelemetry } = require("supergraph-demo-opentelemetry");
+const { ApolloServer } = require("@apollo/server");
+const { startStandaloneServer } = require("@apollo/server/standalone");
+const { buildSubgraphSchema } = require("@apollo/subgraph");
 const { v4: uuidv4 } = require("uuid");
 const { faker } = require("@faker-js/faker")
 const { randomUUID } = require("crypto");
+const { readFileSync } = require("fs");
+const gql = require("graphql-tag");
+
+const port = process.env.APOLLO_PORT || 4000;
 
 // Open Telemetry (optional)
-const { ApolloOpenTelemetry } = require("supergraph-demo-opentelemetry");
-
 if (process.env.APOLLO_OTEL_EXPORTER_TYPE) {
   new ApolloOpenTelemetry({
     type: "subgraph",
@@ -16,13 +22,6 @@ if (process.env.APOLLO_OTEL_EXPORTER_TYPE) {
     },
   }).setupInstrumentation();
 }
-
-const { ApolloServer, gql } = require("apollo-server");
-const { buildSubgraphSchema } = require("@apollo/subgraph");
-const { readFileSync } = require("fs");
-
-const port = process.env.APOLLO_PORT || 4000;
-
 
 ////////////////////////
 // generate fake data //
@@ -127,8 +126,10 @@ const resolvers = {
 const server = new ApolloServer({
   schema: buildSubgraphSchema({ typeDefs, resolvers }),
 });
-server
-  .listen({ port: port })
+
+startStandaloneServer(server, {
+  listen: { port },
+})
   .then(({ url }) => {
     console.log(`🚀 Users subgraph ready at ${url}`);
   })
