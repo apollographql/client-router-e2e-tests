@@ -1,3 +1,5 @@
+![router version](https://img.shields.io/badge/apollographql/router-1.12.1-brightgreen) ![@apollo/server version](https://img.shields.io/badge/@apollo/server-4.5.0-brightgreen) ![@apollo/client version](https://img.shields.io/badge/@apollo/client-3.7.10-brightgreen)
+
 # Client Router E2E Tests
 
 ![Client Router E2E Tests](https://github.com/apollographql/client-router-e2e-tests/actions/workflows/router-e2e-defer-tests.yml/badge.svg)
@@ -6,7 +8,7 @@ A series of E2E tests that run on push to the `main` branch of this repository a
 
 For more information about the test suite, please see [`CRA-demo/README.md`](CRA-demo/README.md).
 
-## Running `apollo-router` and Cypress tests locally
+## Running [Apollo Router](https://www.apollographql.com/docs/router/) and Cypress tests locally
 
 > ⚠️ NB: [Docker Desktop](https://www.docker.com/products/docker-desktop/) must be installed and running.
 
