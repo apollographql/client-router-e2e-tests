@@ -157,7 +157,6 @@ describe("@defer tests", () => {
     cy.findByText(/loading/i).should("not.exist");
     cy.findByRole('button', {name: /make payment/i}).click();
     cy.findByText(/loading/i).should("exist");
-    cy.wait(5000);
     cy.findByText(/"__typename":"MakePaymentResult"/i).should("exist");
   });
 });
