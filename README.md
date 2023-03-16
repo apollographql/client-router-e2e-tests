@@ -8,7 +8,7 @@ A series of E2E tests that run on push to the `main` branch of this repository a
 
 For more information about the test suite, please see [`CRA-demo/README.md`](CRA-demo/README.md).
 
-## Running `apollo-router` and Cypress tests locally
+## Running [Apollo Router](https://www.apollographql.com/docs/router/) and Cypress tests locally
 
 > ⚠️ NB: [Docker Desktop](https://www.docker.com/products/docker-desktop/) must be installed and running.
 
