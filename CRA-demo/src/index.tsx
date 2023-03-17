@@ -26,7 +26,7 @@ import MultipartSubscription from "./pages/multipartSubscription";
 const root = ReactDOM.createRoot(document.getElementById("root") as any);
 
 root.render(
-  <React.StrictMode>
+  <React.Fragment>
     <Router>
       <Routes>
         <Route path="/" element={<Layout />}>
@@ -85,5 +85,5 @@ root.render(
         </Route>
       </Routes>
     </Router>
-  </React.StrictMode>
+  </React.Fragment>
 );

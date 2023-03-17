@@ -14,9 +14,7 @@ function Layout() {
         <header className="App-header">
           <p>Testing multipart subscriptions with Apollo Router.</p>
         </header>
-        <div className="Grid-column">
-          <Outlet />
-        </div>
+        <Outlet />
       </div>
     </ApolloProvider>
   );
