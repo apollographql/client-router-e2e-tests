@@ -105,7 +105,6 @@ describe("@defer tests", () => {
     cy.findAllByText(/apollo-client/i).should("exist");
   });
 
-  // Skipping until AC bug https://github.com/apollographql/apollo-client/issues/10406 is resolved
   // https://github.com/graphql/graphql-js/blob/a24a9f35b876bdd0d5050eca34d3020bd0db9a29/src/execution/__tests__/defer-test.ts#L497
   it("Handles non-nullable errors thrown outside deferred fragments", () => {
     cy.visit("/error-non-nullable-outside-deferred-fragment");
