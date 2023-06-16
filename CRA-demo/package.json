@@ -13,8 +13,8 @@
   "devDependencies": {
     "@testing-library/cypress": "9.0.0",
     "@types/node": "18.16.16",
-    "@types/react": "18.2.11",
-    "@types/react-dom": "18.2.4",
+    "@types/react": "18.2.12",
+    "@types/react-dom": "18.2.5",
     "cypress": "12.14.0",
     "eslint-plugin-cypress": "2.13.3",
     "start-server-and-test": "2.0.0",
