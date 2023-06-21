@@ -10,7 +10,7 @@
     "@apollo/subgraph": "2.4.8",
     "@apollo/server": "4.7.4",
     "@faker-js/faker": "^8.0.0",
-    "graphql": "16.6.0",
+    "graphql": "16.7.0",
     "graphql-tag": "2.12.6",
     "supergraph-demo-opentelemetry": "0.2.4",
     "uuid": "9.0.0"
