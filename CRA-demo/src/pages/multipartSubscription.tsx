@@ -6,12 +6,22 @@ const MULTIPART_SUBSCRIPTION = gql`
   subscription MySubscription {
     aNewDieWasCreated {
       die {
+        id
         roll
         sides
         color
       }
     }
   }
+  # subscription AReviewWasAdded {
+  #   aReviewWasAdded {
+  #     body
+  #     id
+  #     product {
+  #       id
+  #     }
+  #   }
+  # }
 `;
 
 function NewDieCreated({ subscription }: { subscription: DocumentNode }) {
@@ -47,7 +57,7 @@ function NewDieCreated({ subscription }: { subscription: DocumentNode }) {
             Color: {data.aNewDieWasCreated.die.color}
           </span>{" "}
           Number: {data.aNewDieWasCreated.die.roll}
-          <div style={{ margin: '2rem 10rem' }}>
+          <div style={{ margin: "2rem 10rem" }}>
             {colors?.map((color, i) => {
               return (
                 <span
