@@ -1,10 +1,4 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["config:base"],
-  "packageRules": [
-    {
-      "matchPackageNames": ["@apollo/client"],
-      "followTag": "next"
-    }
-  ]
+  "extends": ["config:base"]
 }
