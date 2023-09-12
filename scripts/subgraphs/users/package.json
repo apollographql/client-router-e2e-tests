@@ -13,7 +13,7 @@
     "graphql": "16.8.0",
     "graphql-tag": "2.12.6",
     "supergraph-demo-opentelemetry": "0.2.4",
-    "uuid": "9.0.0"
+    "uuid": "9.0.1"
   },
   "keywords": [],
   "author": "",
