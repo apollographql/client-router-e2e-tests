@@ -7,7 +7,7 @@
     "start": "node users.js"
   },
   "dependencies": {
-    "@apollo/subgraph": "2.5.4",
+    "@apollo/subgraph": "2.5.5",
     "@apollo/server": "4.9.3",
     "@faker-js/faker": "^8.0.0",
     "graphql": "16.8.0",
