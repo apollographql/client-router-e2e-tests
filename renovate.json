@@ -5,19 +5,22 @@
     {
       "groupName": "all @types",
       "groupSlug": "all-types",
-      "matchPackagePatterns": ["@types/*"]
+      "matchPackagePatterns": ["@types/*"],
+      "automerge": true
     },
     {
       "groupName": "all devDependencies",
       "groupSlug": "all-dev",
       "matchPackagePatterns": ["*"],
-      "matchDepTypes": ["devDependencies"]
+      "matchDepTypes": ["devDependencies"],
+      "automerge": true
     },
     {
       "groupName": "all dependencies - patch updates",
       "groupSlug": "all-patch",
       "matchPackagePatterns": ["*"],
-      "matchUpdateTypes": ["patch"]
+      "matchUpdateTypes": ["patch"],
+      "automerge": true
     }
   ]
 }
