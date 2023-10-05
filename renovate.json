@@ -1,4 +1,23 @@
 {
-  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["config:base"]
+  "extends": ["apollo-open-source"],
+  "dependencyDashboard": true,
+  "packageRules": [
+    {
+      "groupName": "all @types",
+      "groupSlug": "all-types",
+      "matchPackagePatterns": ["@types/*"]
+    },
+    {
+      "groupName": "all devDependencies",
+      "groupSlug": "all-dev",
+      "matchPackagePatterns": ["*"],
+      "matchDepTypes": ["devDependencies"]
+    },
+    {
+      "groupName": "all dependencies - patch updates",
+      "groupSlug": "all-patch",
+      "matchPackagePatterns": ["*"],
+      "matchUpdateTypes": ["patch"]
+    }
+  ]
 }
