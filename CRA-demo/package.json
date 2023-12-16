@@ -14,7 +14,7 @@
     "@testing-library/cypress": "10.0.1",
     "@types/node": "18.18.14",
     "@types/react": "18.2.45",
-    "@types/react-dom": "18.2.17",
+    "@types/react-dom": "18.2.18",
     "cypress": "13.5.1",
     "eslint-plugin-cypress": "2.15.1",
     "start-server-and-test": "2.0.3",
