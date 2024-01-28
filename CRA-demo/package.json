@@ -4,11 +4,12 @@
   "private": false,
   "dependencies": {
     "@apollo/client": "3.8.10",
+    "@vitejs/plugin-react": "4.2.1",
     "graphql": "16.8.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-router-dom": "6.21.3",
-    "react-scripts": "5.0.1"
+    "vite": "5.0.12"
   },
   "devDependencies": {
     "@testing-library/cypress": "10.0.1",
@@ -26,8 +27,8 @@
     "cy:run-local": "cypress open",
     "test": "start-server-and-test start http://127.0.0.1:3000 cy:run",
     "test:local": "start-server-and-test start http://127.0.0.1:3000 cy:run-local",
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start": "vite",
+    "build": "vite build",
     "router:up": "cd ../scripts && make docker-build-local-router && make docker-up-local-router && cd ../CRA-demo",
     "router:down": "cd ../scripts && make docker-compose-down && cd ../CRA-demo",
     "router:restart": "npm run router:down && npm run router:up"
