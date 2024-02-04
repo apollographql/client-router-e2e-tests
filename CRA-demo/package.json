@@ -13,10 +13,10 @@
   },
   "devDependencies": {
     "@testing-library/cypress": "10.0.1",
-    "@types/node": "20.11.9",
-    "@types/react": "18.2.48",
+    "@types/node": "20.11.16",
+    "@types/react": "18.2.52",
     "@types/react-dom": "18.2.18",
-    "cypress": "13.6.3",
+    "cypress": "13.6.4",
     "eslint-plugin-cypress": "2.15.1",
     "start-server-and-test": "2.0.3",
     "typescript": "5.3.3",
