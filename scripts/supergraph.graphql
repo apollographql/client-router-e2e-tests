@@ -173,9 +173,9 @@ interface SkuItf
 }
 
 type Subscription
-  @join__type(graph: PRODUCTS)
+  @join__type(graph: USERS)
 {
-  productUpdate: ProductItf
+  countdown(from: Int!): Int!
 }
 
 type User

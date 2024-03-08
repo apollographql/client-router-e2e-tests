@@ -5,7 +5,9 @@ describe("subscriptions over multipart http tests", () => {
     // we'll wait just under 2000ms to check that the
     // query is still pending in its entirety (since @defer is absent)
     cy.findByText(/loading/i).should("exist");
-    cy.wait(2000);
-    cy.findByText(/New product: apollo-/i, { timeout: 1 }).should("exist");
+    cy.wait(1000);
+    cy.findByText(/Countdown: 9/i).should("exist");
+    cy.wait(1000);
+    cy.findByText(/Countdown: 8/i).should("exist");
   });
 });

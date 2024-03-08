@@ -3,20 +3,18 @@ import { gql, DocumentNode, useSubscription } from "@apollo/client";
 
 const MULTIPART_SUBSCRIPTION = gql`
   subscription Subscription {
-    productUpdate {
-      id
-    }
+    countdown(from: 10)
   }
 `;
 
 function NewDieCreated({ subscription }: { subscription: DocumentNode }) {
   const { loading, error, data } = useSubscription(subscription);
-
+  console.log(data);
   return (
     <div>
       {loading ? <p>Loading...</p> : ""}
       {error ? <p>Error :(</p> : ""}
-      {data ? <p>New product: {data.productUpdate.id}</p> : ""}
+      {data ? <p>Countdown: {data.countdown}</p> : ""}
     </div>
   );
 }

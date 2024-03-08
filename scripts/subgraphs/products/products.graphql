@@ -9,10 +9,6 @@ type Query {
   product(id: ID!): ProductItf
 }
 
-type Subscription {
-  productUpdate: ProductItf
-}
-
 interface ProductItf implements SkuItf {
   id: ID!
   sku: String
