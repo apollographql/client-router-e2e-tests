@@ -12,19 +12,32 @@ For more information about the test suite, please see [`demo/README.md`](demo/RE
 
 > ⚠️ NB: [Docker Desktop](https://www.docker.com/products/docker-desktop/) must be installed and running.
 
-After cloning this repository, `cd` into the folder that contains the web application we'll be running tests against with `cd demo` and run `npm i` to install dependencies. Then run the following command to run the router:
+After cloning this repository, first create a `.env` file inside of the `scripts` directory and add these two env vars (necessary for running the federated subscriptions tests):
 
 ```
-$ npm run router:up
+APOLLO_KEY=...
+APOLLO_GRAPH_REF=...
 ```
 
-To run the E2E tests in headful mode, run the following command:
+Then move into the demo web app's directory, install dependencies and run the router:
+
+```
+$ cd demo && npm i && npm run router:up
+```
+
+To run the tests in headful mode, run the following command:
 
 ```
 $ npm run test:local
 ```
 
-This will open the Cypress GUI which allows you to run the test suite and inspect the results. (To run in headless mode, run `npm run test`.)
+This will open the Cypress GUI which allows you to run the test suite and inspect the results.
+
+To run the tests in headless mode, run:
+
+```
+$ npm run test
+```
 
 Finally, to stop running `apollo-router`:
 
@@ -36,7 +49,7 @@ $ npm run router:down
 
 Sometimes testing against a specific branch of the router is necessary. Follow these instructions to run both subgraphs locally and point the router at our local subgraphs.
 
-First, let's run the subgraphs using `concurrently` via npm script at separate predefined ports:
+First, let's run the subgraphs with:
 
 ```
 $ cd demo && npm run subgraphs:up:local
@@ -65,7 +78,7 @@ Finally, rebuild the supergraph schema by entering the `scripts` directory and r
 $ bash compose.sh
 ```
 
-Now, inside your local copy of the `router` repository, checkout the branch you'd like to test and run (assumes `router` and `client-router-e2e-tests` are siblings):
+Now, inside your local copy of the `router` repository, checkout the branch you'd like to test and run (this command assumes `router` and `client-router-e2e-tests` are siblings):
 
 ```
 $ APOLLO_KEY='...' APOLLO_GRAPH_REF='...' cargo run -- --supergraph ../client-router-e2e-tests/scripts/supergraph.graphql --config ../client-router-e2e-tests/scripts/router.yaml --h
