@@ -11,8 +11,8 @@ jobs:
     name: CI Router
     runs-on: ubuntu-latest
     steps:
-      - name: checkout
-        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
+      - name: Checkout repo
+        uses: actions/checkout@v4
 
       - name: install rover
         run: |
@@ -45,7 +45,7 @@ jobs:
 
       - name: Write secrets to .env
         run: |
-          touch $HOME/scripts/.env && cat << EOF > "$HOME/scripts/.env"
+          pwd && touch scripts/.env && cat << EOF > "scripts/.env"
             APOLLO_KEY=$APOLLO_KEY
             APOLLO_GRAPH_REF=$APOLLO_GRAPH_REF
           EOF
