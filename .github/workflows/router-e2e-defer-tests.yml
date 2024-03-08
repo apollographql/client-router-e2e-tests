@@ -45,10 +45,9 @@ jobs:
 
       - name: Write secrets to .env
         run: |
-          pwd && touch scripts/.env && cat << EOF > "scripts/.env"
-            APOLLO_KEY=$APOLLO_KEY
-            APOLLO_GRAPH_REF=$APOLLO_GRAPH_REF
-          EOF
+          touch scripts/.env
+          echo APOLLO_KEY="$APOLLO_KEY" >> scripts/.env
+          echo APOLLO_GRAPH_REF="$APOLLO_GRAPH_REF" >> scripts/.env
         env:
           APOLLO_GRAPH_REF: ${{ secrets.APOLLO_GRAPH_REF }}
           APOLLO_KEY: ${{ secrets.APOLLO_KEY }}
