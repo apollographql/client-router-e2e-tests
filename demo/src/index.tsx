@@ -21,11 +21,12 @@ import ErrorNonNullableInDeferredFragment from "./pages/errorNonNullableInDeferr
 import ErrorNonNullableOutsideDeferredFragment from "./pages/errorNonNullableOutsideDeferredFragment";
 import ErrorTopLevelQueryField from "./pages/errorTopLevelQueryField";
 import DeferredMutation from "./pages/deferredMutation";
+import MultipartSubscription from "./pages/multipartSubscription";
 
 const root = ReactDOM.createRoot(document.getElementById("root") as any);
 
 root.render(
-  <React.StrictMode>
+  <React.Fragment>
     <Router>
       <Routes>
         <Route path="/" element={<Layout />}>
@@ -76,9 +77,13 @@ root.render(
             path="/error-top-level-query-field"
             element={<ErrorTopLevelQueryField />}
           />
+          <Route
+            path="/multipart-subscription"
+            element={<MultipartSubscription />}
+          />
           <Route path="/deferred-mutation" element={<DeferredMutation />} />
         </Route>
       </Routes>
     </Router>
-  </React.StrictMode>
+  </React.Fragment>
 );

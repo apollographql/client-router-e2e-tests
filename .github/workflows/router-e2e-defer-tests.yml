@@ -11,8 +11,8 @@ jobs:
     name: CI Router
     runs-on: ubuntu-latest
     steps:
-      - name: checkout
-        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
+      - name: Checkout repo
+        uses: actions/checkout@v4
 
       - name: install rover
         run: |
@@ -43,6 +43,15 @@ jobs:
           echo "$(docker-compose --version)"
           echo ---------------------------------------------------------------
 
+      - name: Write secrets to .env
+        run: |
+          touch scripts/.env
+          echo APOLLO_KEY="$APOLLO_KEY" >> scripts/.env
+          echo APOLLO_GRAPH_REF="$APOLLO_GRAPH_REF" >> scripts/.env
+        env:
+          APOLLO_GRAPH_REF: ${{ secrets.APOLLO_GRAPH_REF }}
+          APOLLO_KEY: ${{ secrets.APOLLO_KEY }}
+
       - name: docker-build-local-router
         run: cd scripts && make docker-build-local-router
 
@@ -54,7 +63,7 @@ jobs:
         with:
           record: false
           browser: chrome
-          working-directory: CRA-demo
+          working-directory: demo
           command: npm run test
 
       - name: docker-compose-down

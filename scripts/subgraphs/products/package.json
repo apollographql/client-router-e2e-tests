@@ -7,11 +7,17 @@
     "start": "node products.js"
   },
   "dependencies": {
-    "@apollo/subgraph": "2.7.1",
     "@apollo/server": "4.10.1",
+    "@apollo/subgraph": "2.7.1",
+    "cors": "2.8.5",
+    "express": "4.18.3",
+    "express-rate-limit": "7.2.0",
     "graphql": "16.8.1",
     "graphql-tag": "2.12.6",
-    "supergraph-demo-opentelemetry": "0.2.4"
+    "graphql-ws": "5.15.0",
+    "supergraph-demo-opentelemetry": "0.2.4",
+    "uuid": "9.0.1",
+    "ws": "8.16.0"
   },
   "keywords": [],
   "author": "",

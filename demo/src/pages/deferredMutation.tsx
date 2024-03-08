@@ -2,20 +2,10 @@ import { gql } from "@apollo/client";
 import { useMutation } from "@apollo/client";
 
 const USER_QUERY = gql`
-  mutation ($userId: ID!, $paymentInformation: PaymentInformationInput!) {
-    makePayment(userId: $userId, paymentInformation: $paymentInformation) {
-      id
+  mutation ($userId: ID!) {
+    makePayment(userId: $userId) {
       ... @defer {
-        paymentStatus {
-          __typename
-          id
-          ... on PaymentSuccess {
-            billedAmount
-          }
-          ... on PaymentFailed {
-            reason
-          }
-        }
+        id
       }
     }
   }
@@ -23,9 +13,6 @@ const USER_QUERY = gql`
 
 const variables = {
   userId: "1",
-  paymentInformation: {
-    fakeInfo: "demo",
-  },
 };
 
 const MakePayment = () => {

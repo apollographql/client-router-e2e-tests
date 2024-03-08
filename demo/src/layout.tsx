@@ -3,7 +3,7 @@ import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 import "./css/App.css";
 
 const client = new ApolloClient({
-  uri: "http://localhost:4000/",
+  uri: "http://127.0.0.1:4000/",
   cache: new InMemoryCache(),
 });
 
@@ -12,11 +12,9 @@ function Layout() {
     <ApolloProvider client={client}>
       <div className="App">
         <header className="App-header">
-          <p>Testing @defer with Apollo Router.</p>
+          <p>E2E Testing with Apollo Client and Apollo Router 🚀</p>
         </header>
-        <div className="Grid-column">
-          <Outlet />
-        </div>
+        <Outlet />
       </div>
     </ApolloProvider>
   );

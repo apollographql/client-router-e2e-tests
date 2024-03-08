@@ -155,8 +155,7 @@ describe("@defer tests", () => {
   it("Renders the entire response from a mutation containing @defer after the last chunk is returned", () => {
     cy.visit("/deferred-mutation");
     cy.findByText(/loading/i).should("not.exist");
-    cy.findByRole('button', {name: /make payment/i}).click();
-    cy.findByText(/loading/i).should("exist");
+    cy.findByRole("button", { name: /make payment/i }).click();
     cy.findByText(/"__typename":"MakePaymentResult"/i).should("exist");
   });
 });

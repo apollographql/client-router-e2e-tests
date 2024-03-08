@@ -16,8 +16,10 @@
     "@types/node": "20.11.25",
     "@types/react": "18.2.64",
     "@types/react-dom": "18.2.21",
+    "concurrently": "8.2.2",
     "cypress": "13.6.6",
     "eslint-plugin-cypress": "2.15.1",
+    "nodemon": "3.1.0",
     "start-server-and-test": "2.0.3",
     "typescript": "5.3.3",
     "web-vitals": "3.5.2"
@@ -29,8 +31,11 @@
     "test:local": "start-server-and-test start http://localhost:3000 cy:run-local",
     "start": "vite",
     "build": "vite build",
-    "router:up": "cd ../scripts && make docker-build-local-router && make docker-up-local-router && cd ../CRA-demo",
-    "router:down": "cd ../scripts && make docker-compose-down && cd ../CRA-demo",
+    "subgraphs:up:local:users": "cd ../scripts/subgraphs/users && npm i && APOLLO_PORT_USERS=4002 nodemon --exec npm start",
+    "subgraphs:up:local:products": "cd ../scripts/subgraphs/products && npm i && APOLLO_PORT_PRODUCTS=4001 nodemon --exec npm start",
+    "subgraphs:up:local": "concurrently --raw  \"npm run subgraphs:up:local:users\" \"npm run subgraphs:up:local:products \"",
+    "router:up": "cd ../scripts && make docker-build-local-router && make docker-up-local-router && cd ../demo",
+    "router:down": "cd ../scripts && make docker-compose-down && cd ../demo",
     "router:restart": "npm run router:down && npm run router:up"
   },
   "eslintConfig": {

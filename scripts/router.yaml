@@ -7,5 +7,11 @@ sandbox:
   enabled: true
 homepage:
   enabled: false
+subscription:
+  enabled: true
+  mode:
+    passthrough:
+      all:
+        path: /subscriptions
 include_subgraph_errors:
   all: true # Propagate errors from all subraphs

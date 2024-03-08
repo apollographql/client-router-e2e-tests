@@ -3,6 +3,9 @@ services:
   apollo-router:
     container_name: apollo-router
     image: ghcr.io/apollographql/router:v1.40.2
+    environment:
+      - APOLLO_KEY=${APOLLO_KEY}
+      - APOLLO_GRAPH_REF=${APOLLO_GRAPH_REF}
     volumes:
       - ./supergraph.graphql:/dist/schema/supergraph.graphql
       - ./router.yaml:/dist/config/router.yaml

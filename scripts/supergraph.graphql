@@ -1,26 +1,31 @@
 schema
   @link(url: "https://specs.apollo.dev/link/v1.0")
-  @link(url: "https://specs.apollo.dev/join/v0.2", for: EXECUTION)
-  @link(url: "https://specs.apollo.dev/tag/v0.2")
+  @link(url: "https://specs.apollo.dev/join/v0.3", for: EXECUTION)
+  @link(url: "https://specs.apollo.dev/tag/v0.3")
   @link(url: "https://specs.apollo.dev/inaccessible/v0.2", for: SECURITY)
 {
   query: Query
   mutation: Mutation
+  subscription: Subscription
 }
 
 directive @inaccessible on FIELD_DEFINITION | OBJECT | INTERFACE | UNION | ARGUMENT_DEFINITION | SCALAR | ENUM | ENUM_VALUE | INPUT_OBJECT | INPUT_FIELD_DEFINITION
 
-directive @join__field(graph: join__Graph!, requires: join__FieldSet, provides: join__FieldSet, type: String, external: Boolean, override: String, usedOverridden: Boolean) repeatable on FIELD_DEFINITION | INPUT_FIELD_DEFINITION
+directive @join__enumValue(graph: join__Graph!) repeatable on ENUM_VALUE
+
+directive @join__field(graph: join__Graph, requires: join__FieldSet, provides: join__FieldSet, type: String, external: Boolean, override: String, usedOverridden: Boolean) repeatable on FIELD_DEFINITION | INPUT_FIELD_DEFINITION
 
 directive @join__graph(name: String!, url: String!) on ENUM_VALUE
 
 directive @join__implements(graph: join__Graph!, interface: String!) repeatable on OBJECT | INTERFACE
 
-directive @join__type(graph: join__Graph!, key: join__FieldSet, extension: Boolean! = false, resolvable: Boolean! = true) repeatable on OBJECT | INTERFACE | UNION | ENUM | INPUT_OBJECT | SCALAR
+directive @join__type(graph: join__Graph!, key: join__FieldSet, extension: Boolean! = false, resolvable: Boolean! = true, isInterfaceObject: Boolean! = false) repeatable on OBJECT | INTERFACE | UNION | ENUM | INPUT_OBJECT | SCALAR
+
+directive @join__unionMember(graph: join__Graph!, member: String!) repeatable on UNION
 
 directive @link(url: String, as: String, for: link__Purpose, import: [link__Import]) repeatable on SCHEMA
 
-directive @tag(name: String!) repeatable on FIELD_DEFINITION | OBJECT | INTERFACE | UNION | ARGUMENT_DEFINITION | SCALAR | ENUM | ENUM_VALUE | INPUT_OBJECT | INPUT_FIELD_DEFINITION
+directive @tag(name: String!) repeatable on FIELD_DEFINITION | OBJECT | INTERFACE | UNION | ARGUMENT_DEFINITION | SCALAR | ENUM | ENUM_VALUE | INPUT_OBJECT | INPUT_FIELD_DEFINITION | SCHEMA
 
 scalar join__FieldSet
 
@@ -44,17 +49,15 @@ enum link__Purpose {
 }
 
 type MakePaymentResult
-  @join__type(graph: USERS)
+  @join__type(graph: PRODUCTS)
 {
   id: ID!
-  user: PaymentUser!
-  paymentStatus: PaymentStatus
 }
 
 type Mutation
-  @join__type(graph: USERS)
+  @join__type(graph: PRODUCTS)
 {
-  makePayment(userId: ID!, paymentInformation: PaymentInformationInput!): MakePaymentResult!
+  makePayment(userId: ID!): MakePaymentResult!
 }
 
 type PaymentFailed implements PaymentStatus
@@ -63,12 +66,6 @@ type PaymentFailed implements PaymentStatus
 {
   id: ID!
   reason: String!
-}
-
-input PaymentInformationInput
-  @join__type(graph: USERS)
-{
-  fakeInfo: String!
 }
 
 interface PaymentStatus
@@ -165,6 +162,12 @@ interface SkuItf
   @join__type(graph: PRODUCTS)
 {
   sku: String
+}
+
+type Subscription
+  @join__type(graph: USERS)
+{
+  countdown(from: Int!): Int!
 }
 
 type User

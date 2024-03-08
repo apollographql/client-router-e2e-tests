@@ -10,6 +10,10 @@ type Query {
   users: [PaymentUser!]!
 }
 
+type Subscription {
+  countdown(from: Int!): Int!
+}
+
 type PaymentUser {
   id: ID!
   name: String!
@@ -19,23 +23,6 @@ type PaymentUser {
   phoneNumber: String
   title: String
   avatarUrl: String
-}
-
-type Mutation {
-  makePayment(
-    userId: ID!
-    paymentInformation: PaymentInformationInput!
-  ): MakePaymentResult!
-}
-
-input PaymentInformationInput {
-  fakeInfo: String!
-}
-
-type MakePaymentResult {
-  id: ID!
-  user: PaymentUser!
-  paymentStatus: PaymentStatus
 }
 
 interface PaymentStatus {

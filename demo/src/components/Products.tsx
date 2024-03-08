@@ -12,7 +12,7 @@ export default function Products({ query }: { query: DocumentNode }) {
   }>(query);
 
   return (
-    <div>
+    <div className="Grid-column">
       {loading ? <p>Loading...</p> : ""}
       {error ? <p>Error :(</p> : ""}
       {data?.allProducts.map(({ id, sku, dimensions, variation }) => (
