@@ -25,23 +25,6 @@ type PaymentUser {
   avatarUrl: String
 }
 
-type Mutation {
-  makePayment(
-    userId: ID!
-    paymentInformation: PaymentInformationInput!
-  ): MakePaymentResult!
-}
-
-input PaymentInformationInput {
-  fakeInfo: String!
-}
-
-type MakePaymentResult {
-  id: ID!
-  user: PaymentUser!
-  paymentStatus: PaymentStatus
-}
-
 interface PaymentStatus {
   id: ID!
 }

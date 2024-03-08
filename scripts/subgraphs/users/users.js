@@ -99,15 +99,6 @@ const resolvers = {
       },
     },
   },
-  Mutation: {
-    makePayment: (p, a, c, i) => {
-      let u = getSpecificUser(a.userId);
-      return {
-        id: uuidv4(),
-        user: u,
-      };
-    },
-  },
   User: {
     friends: async (p, a, c, i) => {
       console.log(a);

@@ -9,6 +9,14 @@ type Query {
   product(id: ID!): ProductItf
 }
 
+type Mutation {
+  makePayment(userId: ID!): MakePaymentResult!
+}
+
+type MakePaymentResult {
+  id: ID!
+}
+
 interface ProductItf implements SkuItf {
   id: ID!
   sku: String

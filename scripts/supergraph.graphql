@@ -49,17 +49,15 @@ enum link__Purpose {
 }
 
 type MakePaymentResult
-  @join__type(graph: USERS)
+  @join__type(graph: PRODUCTS)
 {
   id: ID!
-  user: PaymentUser!
-  paymentStatus: PaymentStatus
 }
 
 type Mutation
-  @join__type(graph: USERS)
+  @join__type(graph: PRODUCTS)
 {
-  makePayment(userId: ID!, paymentInformation: PaymentInformationInput!): MakePaymentResult!
+  makePayment(userId: ID!): MakePaymentResult!
 }
 
 type PaymentFailed implements PaymentStatus
@@ -68,12 +66,6 @@ type PaymentFailed implements PaymentStatus
 {
   id: ID!
   reason: String!
-}
-
-input PaymentInformationInput
-  @join__type(graph: USERS)
-{
-  fakeInfo: String!
 }
 
 interface PaymentStatus

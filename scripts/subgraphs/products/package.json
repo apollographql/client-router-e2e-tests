@@ -16,6 +16,7 @@
     "graphql-tag": "2.12.6",
     "graphql-ws": "5.15.0",
     "supergraph-demo-opentelemetry": "0.2.4",
+    "uuid": "9.0.1",
     "ws": "8.16.0"
   },
   "keywords": [],
