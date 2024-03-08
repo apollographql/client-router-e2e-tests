@@ -1,10 +1,10 @@
 federation_version: =2.6.1
 subgraphs:
   products:
-    routing_url: http://products:4000/graphql
+    routing_url: http://localhost:4001/graphql
     schema:
       file: subgraphs/products/products.graphql
   users:
-    routing_url: http://users:4000/graphql
+    routing_url: http://localhost:4002/graphql
     schema:
       file: subgraphs/users/users.graphql

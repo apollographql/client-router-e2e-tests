@@ -30,8 +30,8 @@ directive @tag(name: String!) repeatable on FIELD_DEFINITION | OBJECT | INTERFAC
 scalar join__FieldSet
 
 enum join__Graph {
-  PRODUCTS @join__graph(name: "products", url: "http://products:4000/graphql")
-  USERS @join__graph(name: "users", url: "http://users:4000/graphql")
+  PRODUCTS @join__graph(name: "products", url: "http://localhost:4001/graphql")
+  USERS @join__graph(name: "users", url: "http://localhost:4002/graphql")
 }
 
 scalar link__Import
@@ -165,9 +165,11 @@ interface SkuItf
 }
 
 type Subscription
+  @join__type(graph: PRODUCTS)
   @join__type(graph: USERS)
 {
-  countdown(from: Int!): Int!
+  productUpdate: ProductItf @join__field(graph: PRODUCTS)
+  countdown(from: Int!): Int! @join__field(graph: USERS)
 }
 
 type User

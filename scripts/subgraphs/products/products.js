@@ -1,12 +1,23 @@
 const { ApolloOpenTelemetry } = require("supergraph-demo-opentelemetry");
 const { ApolloServer } = require("@apollo/server");
-const { startStandaloneServer } = require("@apollo/server/standalone");
+const { expressMiddleware } = require("@apollo/server/express4");
+const cors = require("cors");
+const { json } = require("body-parser");
+const {
+  ApolloServerPluginDrainHttpServer,
+} = require("@apollo/server/plugin/drainHttpServer");
 const { buildSubgraphSchema } = require("@apollo/subgraph");
+const { WebSocketServer } = require("ws");
+const http = require("http");
+const express = require("express");
+const rateLimit = require("express-rate-limit");
+const { useServer } = require("graphql-ws/lib/use/ws");
+const { setTimeout } = require("node:timers/promises");
 const { readFileSync } = require("fs");
-const { v4: uuidv4 } = require("uuid");
 const gql = require("graphql-tag");
 
 const port = process.env.APOLLO_PORT_PRODUCTS || 4000;
+const rateLimitTreshold = process.env.LIMIT || 5000;
 
 // Open Telemetry (optional)
 if (process.env.APOLLO_OTEL_EXPORTER_TYPE) {
@@ -53,11 +64,15 @@ const resolvers = {
       return products.find((p) => p.id == args.id);
     },
   },
-  Mutation: {
-    makePayment: (p, a, c, i) => {
-      return {
-        id: uuidv4(),
-      };
+  Subscription: {
+    productUpdate: {
+      subscribe: async function* () {
+        for (let count = 0; count < 1000; count++) {
+          let product = products[Math.floor(Math.random() * products.length)];
+          yield { productUpdate: product };
+          await setTimeout(3000);
+        }
+      },
     },
   },
   ProductItf: {
@@ -109,16 +124,52 @@ const resolvers = {
   },
 };
 
-const server = new ApolloServer({
-  schema: buildSubgraphSchema({ typeDefs, resolvers }),
-});
-
-startStandaloneServer(server, {
-  listen: { port },
-})
-  .then(({ url }) => {
-    console.log(`🚀 Users subgraph ready at ${url}`);
-  })
-  .catch((err) => {
-    console.error(err);
+async function startApolloServer(typeDefs, resolvers) {
+  const app = express();
+  const limiter = rateLimit({
+    windowMs: 60 * 60 * 1000, // 1 hour
+    max: rateLimitTreshold,
   });
+
+  const schema = buildSubgraphSchema([
+    {
+      typeDefs,
+      resolvers,
+    },
+  ]);
+  const httpServer = http.createServer(app);
+  const wsServer = new WebSocketServer({
+    server: httpServer,
+    path: "/subscriptions",
+  });
+
+  const serverCleanup = useServer({ schema }, wsServer);
+
+  const server = new ApolloServer({
+    schema,
+    plugins: [
+      ApolloServerPluginDrainHttpServer(
+        { httpServer },
+        {
+          async serverWillStart() {
+            return {
+              async drainServer() {
+                await serverCleanup.dispose();
+              },
+            };
+          },
+        }
+      ),
+    ],
+  });
+
+  await server.start();
+
+  app.use("/", cors(), json(), limiter, expressMiddleware(server));
+
+  await new Promise((resolve) => httpServer.listen({ port }, resolve));
+
+  console.log(`🚀 Products Server ready at http://localhost:${port}/`);
+}
+
+startApolloServer(typeDefs, resolvers);

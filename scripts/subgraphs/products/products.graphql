@@ -9,6 +9,10 @@ type Query {
   product(id: ID!): ProductItf
 }
 
+type Subscription {
+  productUpdate: ProductItf
+}
+
 type Mutation {
   makePayment(userId: ID!): MakePaymentResult!
 }
