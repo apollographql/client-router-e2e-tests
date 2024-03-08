@@ -4,9 +4,9 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 It runs a series of end-to-end tests with [Cypress](https://www.cypress.io/) [inspired by the `graphql-js` `@defer` test suite](https://github.com/graphql/graphql-js/blob/main/src/execution/__tests__/defer-test.ts).
 
-Each test case corresponds to a single page in the demo app inside of `CRA-demo/src/pages`. Pages contain the test query they execute via `useQuery` and are imported inside of `CRA-demo/src/index.js` where each page is rendered at a corresponding route.
+Each test case corresponds to a single page in the demo app inside of `demo/src/pages`. Pages contain the test query they execute via `useQuery` and are imported inside of `demo/src/index.js` where each page is rendered at a corresponding route.
 
-The tests can be found in `CRA-demo/cypress/e2e/defer.cy.js`: each `it` block renders a single route and makes assertions based on the expected output as `@apollo/client@beta` is used to parse `apollo-router`'s multipart response and render the chunks incrementally.
+The tests can be found in `demo/cypress/e2e/defer.cy.js`: each `it` block renders a single route and makes assertions based on the expected output as `@apollo/client@beta` is used to parse `apollo-router`'s multipart response and render the chunks incrementally.
 
 ## Available Scripts
 

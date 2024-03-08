@@ -54,7 +54,7 @@ jobs:
         with:
           record: false
           browser: chrome
-          working-directory: CRA-demo
+          working-directory: demo
           command: npm run test
 
       - name: docker-compose-down

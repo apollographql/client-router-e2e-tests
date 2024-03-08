@@ -3,12 +3,12 @@ const { ApolloServer } = require("@apollo/server");
 const { startStandaloneServer } = require("@apollo/server/standalone");
 const { buildSubgraphSchema } = require("@apollo/subgraph");
 const { v4: uuidv4 } = require("uuid");
-const { faker } = require("@faker-js/faker")
+const { faker } = require("@faker-js/faker");
 const { randomUUID } = require("crypto");
 const { readFileSync } = require("fs");
 const gql = require("graphql-tag");
 
-const port = process.env.APOLLO_PORT || 4000;
+const port = process.env.APOLLO_PORT_USERS || 4000;
 
 // Open Telemetry (optional)
 if (process.env.APOLLO_OTEL_EXPORTER_TYPE) {

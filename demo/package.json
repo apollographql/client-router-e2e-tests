@@ -31,8 +31,9 @@
     "test:local": "start-server-and-test start http://localhost:3000 cy:run-local",
     "start": "vite",
     "build": "vite build",
-    "router:up": "cd ../scripts && make docker-build-local-router && make docker-up-local-router && cd ../CRA-demo",
-    "router:down": "cd ../scripts && make docker-compose-down && cd ../CRA-demo",
+    "subgraphs:up:local": "npx concurrently 'cd ../scripts/subgraphs/products && npm i && APOLLO_PORT_PRODUCTS=4001 npm start' 'cd ../scripts/subgraphs/users && npm i && APOLLO_PORT_USERS=4002 npm start'",
+    "router:up": "cd ../scripts && make docker-build-local-router && make docker-up-local-router && cd ../demo",
+    "router:down": "cd ../scripts && make docker-compose-down && cd ../demo",
     "router:restart": "npm run router:down && npm run router:up"
   },
   "eslintConfig": {

@@ -14,8 +14,8 @@ const MULTIPART_SUBSCRIPTION = gql`
   #   }
   # }
   subscription Subscription {
-    reviewAdded {
-      body
+    productUpdate {
+      id
     }
   }
 `;
