@@ -43,6 +43,16 @@ jobs:
           echo "$(docker-compose --version)"
           echo ---------------------------------------------------------------
 
+      - name: Write secrets to .env
+        run: |
+          cat << EOF > "$HOME/scripts/.env"
+            APOLLO_KEY=$APOLLO_KEY
+            APOLLO_GRAPH_REF=$APOLLO_GRAPH_REF
+          EOF
+        env:
+          APOLLO_GRAPH_REF: ${{ secrets.APOLLO_GRAPH_REF }}
+          APOLLO_KEY: ${{ secrets.APOLLO_KEY }}
+
       - name: docker-build-local-router
         run: cd scripts && make docker-build-local-router
 

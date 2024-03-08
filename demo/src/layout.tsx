@@ -12,7 +12,7 @@ function Layout() {
     <ApolloProvider client={client}>
       <div className="App">
         <header className="App-header">
-          <p>Testing multipart subscriptions with Apollo Router.</p>
+          <p>E2E Testing with Apollo Client and Apollo Router 🚀</p>
         </header>
         <Outlet />
       </div>

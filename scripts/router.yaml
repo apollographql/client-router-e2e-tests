@@ -8,6 +8,7 @@ sandbox:
 homepage:
   enabled: false
 subscription:
+  enabled: true
   mode:
     passthrough:
       all:

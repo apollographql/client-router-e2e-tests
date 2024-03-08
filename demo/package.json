@@ -3,10 +3,9 @@
   "version": "0.1.0",
   "private": false,
   "dependencies": {
-    "@apollo/client": "^0.0.0-pr-11594-20240213203418",
+    "@apollo/client": "3.9.6",
     "@vitejs/plugin-react": "4.2.1",
     "graphql": "16.8.1",
-    "randomcolor": "0.6.2",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-router-dom": "6.22.2",
@@ -15,11 +14,12 @@
   "devDependencies": {
     "@testing-library/cypress": "10.0.1",
     "@types/node": "20.11.24",
-    "@types/randomcolor": "0.5.7",
     "@types/react": "18.2.61",
     "@types/react-dom": "18.2.19",
+    "concurrently": "8.2.2",
     "cypress": "13.6.6",
     "eslint-plugin-cypress": "2.15.1",
+    "nodemon": "3.1.0",
     "start-server-and-test": "2.0.3",
     "typescript": "5.3.3",
     "web-vitals": "3.5.2"
@@ -31,7 +31,9 @@
     "test:local": "start-server-and-test start http://localhost:3000 cy:run-local",
     "start": "vite",
     "build": "vite build",
-    "subgraphs:up:local": "npx concurrently 'cd ../scripts/subgraphs/products && npm i && APOLLO_PORT_PRODUCTS=4001 npm start' 'cd ../scripts/subgraphs/users && npm i && APOLLO_PORT_USERS=4002 npm start'",
+    "subgraphs:up:local:users": "cd ../scripts/subgraphs/users && npm i && APOLLO_PORT_USERS=4002 nodemon --exec npm start",
+    "subgraphs:up:local:products": "cd ../scripts/subgraphs/products && npm i && APOLLO_PORT_PRODUCTS=4001 nodemon --exec npm start",
+    "subgraphs:up:local": "concurrently --raw  \"npm run subgraphs:up:local:users\" \"npm run subgraphs:up:local:products \"",
     "router:up": "cd ../scripts && make docker-build-local-router && make docker-up-local-router && cd ../demo",
     "router:down": "cd ../scripts && make docker-compose-down && cd ../demo",
     "router:restart": "npm run router:down && npm run router:up"
