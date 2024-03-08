@@ -45,7 +45,7 @@ jobs:
 
       - name: Write secrets to .env
         run: |
-          cat << EOF > "$HOME/scripts/.env"
+          touch $HOME/scripts/.env && cat << EOF > "$HOME/scripts/.env"
             APOLLO_KEY=$APOLLO_KEY
             APOLLO_GRAPH_REF=$APOLLO_GRAPH_REF
           EOF
