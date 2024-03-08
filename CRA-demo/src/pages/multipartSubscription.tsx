@@ -3,88 +3,78 @@ import randomColor from "randomcolor";
 import { gql, DocumentNode, useSubscription } from "@apollo/client";
 
 const MULTIPART_SUBSCRIPTION = gql`
-  subscription MySubscription {
-    aNewDieWasCreated {
-      die {
-        id
-        roll
-        sides
-        color
-      }
-    }
-  }
-  # subscription AReviewWasAdded {
-  #   aReviewWasAdded {
-  #     body
-  #     id
-  #     product {
+  # subscription MySubscription {
+  #   aNewDieWasCreated {
+  #     die {
   #       id
+  #       roll
+  #       sides
+  #       color
   #     }
   #   }
   # }
+  subscription Subscription {
+    reviewAdded {
+      body
+    }
+  }
 `;
 
 function NewDieCreated({ subscription }: { subscription: DocumentNode }) {
-  const { loading, error, data } = useSubscription<{
-    aNewDieWasCreated: {
-      die: {
-        color: string;
-        roll: number;
-        sides: number;
-      };
-    };
-  }>(subscription);
+  const { loading, error, data } = useSubscription(subscription);
+  console.log(data);
+  // console.log(error);
+  // let colors;
+  // if (data) {
+  //   colors = randomColor({
+  //     hue: data.aNewDieWasCreated.die.color,
+  //     count: data.aNewDieWasCreated.die.roll,
+  //   });
+  // }
 
-  let colors;
-  if (data) {
-    colors = randomColor({
-      hue: data.aNewDieWasCreated.die.color,
-      count: data.aNewDieWasCreated.die.roll,
-    });
-  }
-
-  return (
-    <div style={{ marginTop: "1rem" }}>
-      {loading ? <p>Loading...</p> : ""}
-      {error ? <p>Error :(</p> : ""}
-      {data ? (
-        <>
-          <span
-            style={{
-              color: data.aNewDieWasCreated.die.color,
-            }}
-          >
-            Color: {data.aNewDieWasCreated.die.color}
-          </span>{" "}
-          Number: {data.aNewDieWasCreated.die.roll}
-          <div style={{ margin: "2rem 10rem" }}>
-            {colors?.map((color, i) => {
-              return (
-                <span
-                  key={`${color}-${i}`}
-                  style={{
-                    background: color,
-                    width: "1.5em",
-                    height: "1.5em",
-                    borderRadius: "50%",
-                    display: "block",
-                    textIndent: "-1000px",
-                    float: "left",
-                    overflow: "hidden",
-                    margin: "0 1em 1em 0",
-                  }}
-                >
-                  #ff7856
-                </span>
-              );
-            })}
-          </div>
-        </>
-      ) : (
-        ""
-      )}
-    </div>
-  );
+  return null;
+  // return (
+  //   <div style={{ marginTop: "1rem" }}>
+  //     {loading ? <p>Loading...</p> : ""}
+  //     {error ? <p>Error :(</p> : ""}
+  //     {data ? (
+  //       <>
+  //         <span
+  //           style={{
+  //             color: data.aNewDieWasCreated.die.color,
+  //           }}
+  //         >
+  //           Color: {data.aNewDieWasCreated.die.color}
+  //         </span>{" "}
+  //         Number: {data.aNewDieWasCreated.die.roll}
+  //         <div style={{ margin: "2rem 10rem" }}>
+  //           {colors?.map((color, i) => {
+  //             return (
+  //               <span
+  //                 key={`${color}-${i}`}
+  //                 style={{
+  //                   background: color,
+  //                   width: "1.5em",
+  //                   height: "1.5em",
+  //                   borderRadius: "50%",
+  //                   display: "block",
+  //                   textIndent: "-1000px",
+  //                   float: "left",
+  //                   overflow: "hidden",
+  //                   margin: "0 1em 1em 0",
+  //                 }}
+  //               >
+  //                 #ff7856
+  //               </span>
+  //             );
+  //           })}
+  //         </div>
+  //       </>
+  //     ) : (
+  //       ""
+  //     )}
+  //   </div>
+  // );
 }
 
 export default function DuplicateFragmentDeferredFirst() {

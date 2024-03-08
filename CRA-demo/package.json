@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": false,
   "dependencies": {
-    "@apollo/client": "3.7.15",
+    "@apollo/client": "^0.0.0-pr-11594-20240213203418",
     "graphql": "16.6.0",
     "randomcolor": "0.6.2",
     "react": "18.2.0",
