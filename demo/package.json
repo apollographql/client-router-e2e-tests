@@ -21,7 +21,7 @@
     "eslint-plugin-cypress": "2.15.1",
     "nodemon": "3.1.0",
     "start-server-and-test": "2.0.3",
-    "typescript": "5.3.3",
+    "typescript": "5.4.2",
     "web-vitals": "3.5.2"
   },
   "scripts": {
