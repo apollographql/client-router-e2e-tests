@@ -12,7 +12,6 @@ const http = require("http");
 const express = require("express");
 const rateLimit = require("express-rate-limit");
 const { useServer } = require("graphql-ws/lib/use/ws");
-const { setTimeout } = require("node:timers/promises");
 const { readFileSync } = require("fs");
 const gql = require("graphql-tag");
 
