@@ -7,8 +7,8 @@
     "start": "node users.js"
   },
   "dependencies": {
-    "@apollo/server": "4.10.1",
-    "@apollo/subgraph": "2.7.1",
+    "@apollo/server": "4.10.2",
+    "@apollo/subgraph": "2.7.2",
     "@faker-js/faker": "8.4.1",
     "cors": "2.8.5",
     "express": "4.18.3",

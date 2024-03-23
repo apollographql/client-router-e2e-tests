@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": false,
   "dependencies": {
-    "@apollo/client": "3.9.7",
+    "@apollo/client": "3.9.9",
     "@vitejs/plugin-react": "4.2.1",
     "graphql": "16.8.1",
     "react": "18.2.0",
@@ -13,15 +13,15 @@
   },
   "devDependencies": {
     "@testing-library/cypress": "10.0.1",
-    "@types/node": "20.11.28",
-    "@types/react": "18.2.66",
+    "@types/node": "20.11.30",
+    "@types/react": "18.2.69",
     "@types/react-dom": "18.2.22",
     "concurrently": "8.2.2",
-    "cypress": "13.7.0",
+    "cypress": "13.7.1",
     "eslint-plugin-cypress": "2.15.1",
     "nodemon": "3.1.0",
     "start-server-and-test": "2.0.3",
-    "typescript": "5.4.2",
+    "typescript": "5.4.3",
     "web-vitals": "3.5.2"
   },
   "scripts": {
