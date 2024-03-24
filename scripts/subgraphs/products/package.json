@@ -7,8 +7,8 @@
     "start": "node products.js"
   },
   "dependencies": {
-    "@apollo/server": "4.10.1",
-    "@apollo/subgraph": "2.7.1",
+    "@apollo/server": "4.10.2",
+    "@apollo/subgraph": "2.7.2",
     "cors": "2.8.5",
     "express": "4.19.1",
     "express-rate-limit": "7.2.0",
