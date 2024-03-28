@@ -1,4 +1,4 @@
-![router version](https://img.shields.io/badge/apollographql/router-1.42.0-brightgreen) ![@apollo/server version](https://img.shields.io/badge/@apollo/server-4.10.1-brightgreen) ![@apollo/client version](https://img.shields.io/badge/@apollo/client-3.9.7-brightgreen)
+![router version](https://img.shields.io/badge/apollographql/router-1.43.0-brightgreen) ![@apollo/server version](https://img.shields.io/badge/@apollo/server-4.10.2-brightgreen) ![@apollo/client version](https://img.shields.io/badge/@apollo/client-3.9.9-brightgreen)
 
 # Client Router E2E Tests
 
