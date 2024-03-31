@@ -13,7 +13,7 @@
   },
   "devDependencies": {
     "@testing-library/cypress": "10.0.1",
-    "@types/node": "20.11.30",
+    "@types/node": "20.12.2",
     "@types/react": "18.2.73",
     "@types/react-dom": "18.2.23",
     "concurrently": "8.2.2",
