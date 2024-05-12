@@ -8,13 +8,13 @@
     "graphql": "16.8.1",
     "react": "18.3.1",
     "react-dom": "18.3.1",
-    "react-router-dom": "6.23.0",
+    "react-router-dom": "6.23.1",
     "vite": "5.2.11"
   },
   "devDependencies": {
     "@testing-library/cypress": "10.0.1",
     "@types/node": "20.12.11",
-    "@types/react": "18.3.1",
+    "@types/react": "18.3.2",
     "@types/react-dom": "18.3.0",
     "concurrently": "8.2.2",
     "cypress": "13.8.1",
