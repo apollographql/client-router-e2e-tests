@@ -8,7 +8,7 @@
   },
   "dependencies": {
     "@apollo/server": "4.11.0",
-    "@apollo/subgraph": "2.8.4",
+    "@apollo/subgraph": "2.9.0",
     "cors": "2.8.5",
     "express": "4.19.2",
     "express-rate-limit": "7.4.0",
