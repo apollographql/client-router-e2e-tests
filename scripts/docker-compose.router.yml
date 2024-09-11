@@ -2,7 +2,7 @@ version: "3"
 services:
   apollo-router:
     container_name: apollo-router
-    image: ghcr.io/apollographql/router:v1.53.0
+    image: ghcr.io/apollographql/router:v1.54.0
     environment:
       - APOLLO_KEY=${APOLLO_KEY}
       - APOLLO_GRAPH_REF=${APOLLO_GRAPH_REF}
