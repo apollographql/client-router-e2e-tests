@@ -9,12 +9,12 @@
   "dependencies": {
     "@apollo/server": "4.11.2",
     "@apollo/subgraph": "2.9.3",
-    "cors": "2.8.5",
+    "cors": "2.8.6",
     "express": "4.21.1",
     "express-rate-limit": "7.4.1",
     "graphql": "16.9.0",
-    "graphql-tag": "2.12.6",
-    "graphql-ws": "5.16.0",
+    "graphql-tag": "2.12.7",
+    "graphql-ws": "5.16.2",
     "supergraph-demo-opentelemetry": "0.2.4",
     "uuid": "10.0.0",
     "ws": "8.18.0"
